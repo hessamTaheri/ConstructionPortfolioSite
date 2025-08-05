@@ -1,0 +1,682 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Our Construction Team - Premier Building & Renovation</title>
+
+<!-- Merriweather font from Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<style>
+  /* Reset and basics */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; 
+    font-family: 'Merriweather', serif; 
+    background: #FAFAFA;
+    color: #222222;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    text-decoration: none;
+    color: #17A2B8; /* Accent Blue */
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #0B1D3F; /* Navy Dark */
+  }
+  /* Scroll smooth for all */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Header */
+  header {
+    background: #0B1D3F; /* Navy Dark */
+    color: white;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    box-shadow: 0 2px 8px rgba(11, 29, 63, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: 1.5px;
+    user-select: none;
+  }
+  nav a {
+    margin-left: 2rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #17A2B8;
+  }
+  nav a:first-child {
+    margin-left: 0;
+  }
+  nav a:hover, nav a:focus {
+    color: #FAFAFA;
+  }
+  /* CTA Button */
+  .btn-cta {
+    background-color: #17A2B8;
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 0.55rem 1.3rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 2rem;
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.4);
+    user-select: none;
+  }
+  .btn-cta:hover, .btn-cta:focus {
+    background-color: #0B1D3F;
+    box-shadow: 0 6px 20px rgba(11, 29, 63, 0.8);
+    outline: none;
+  }
+  /* Hamburger for mobile */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+  .hamburger span {
+    height: 3px;
+    width: 25px;
+    background: white;
+    border-radius: 2px;
+  }
+
+  /* Mobile nav */
+  @media (max-width: 768px) {
+    nav {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      background: #0B1D3F;
+      height: calc(100% - 60px);
+      width: 220px;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      padding-top: 1.5rem;
+      z-index: 10000;
+    }
+    nav.active {
+      transform: translateX(0);
+    }
+    nav a {
+      margin: 1.2rem 1.5rem;
+      font-size: 1.2rem;
+    }
+    .hamburger {
+      display: flex;
+    }
+    .btn-cta {
+      margin: 1.5rem;
+    }
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(rgba(11,29,63,0.75), rgba(11,29,63,0.75)),
+      url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1470&q=80') no-repeat center/cover;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 700;
+    font-size: 3.2rem;
+    text-align: center;
+    padding: 0 1rem;
+    user-select: none;
+  }
+  .hero p {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-top: 0.75rem;
+    max-width: 650px;
+    letter-spacing: 0.3px;
+  }
+  .hero .btn-cta {
+    margin-top: 2rem;
+    font-size: 1.15rem;
+    padding: 0.8rem 2.2rem;
+    box-shadow: 0 6px 25px rgba(23, 162, 184, 0.5);
+  }
+  .hero .btn-cta:hover, .hero .btn-cta:focus {
+    box-shadow: 0 8px 30px rgba(11, 29, 63, 0.9);
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 3rem auto 5rem;
+    padding: 0 1.25rem;
+  }
+
+  /* Section Titles */
+  h2 {
+    color: #0B1D3F;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1.3rem;
+    user-select: none;
+  }
+
+  /* Services Grid */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2.2rem;
+  }
+  .service-card {
+    background: white;
+    padding: 1.8rem 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease;
+    user-select: none;
+  }
+  .service-card:hover, .service-card:focus {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 35px rgba(0,0,0,0.15);
+    outline: none;
+  }
+  .service-icon {
+    font-size: 3.8rem;
+    color: #17A2B8;
+    margin-bottom: 1rem;
+  }
+  .service-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #0B1D3F;
+  }
+
+  /* Service Detail Section */
+  .service-detail {
+    background: white;
+    padding: 2rem 2.5rem 3rem;
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    margin-bottom: 4.5rem;
+    user-select: none;
+  }
+  .service-detail h2 {
+    color: #0B1D3F;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .service-desc {
+    font-weight: 400;
+    color: #444;
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.55;
+  }
+  .subservices-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+  }
+  .subservice-item {
+    flex: 1 1 190px;
+    background: #E1F0F6;
+    border-radius: 12px;
+    padding: 1rem 1.3rem;
+    font-weight: 600;
+    color: #0B1D3F;
+    box-shadow: 0 3px 10px rgba(23,162,184,0.3);
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .subservice-item:hover, .subservice-item:focus {
+    background-color: #17A2B8;
+    color: white;
+    outline: none;
+  }
+
+  /* Before After Slider */
+  .before-after-wrapper {
+    position: relative;
+    max-width: 900px;
+    margin: 2rem auto 0 auto;
+    user-select: none;
+  }
+  .before-after-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  }
+  /* Overlay for after image - width changes on slider input */
+  .after-img {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  }
+  .after-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Slider style */
+  .slider-container {
+    position: relative;
+    margin-top: 1.4rem;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 14px;
+    background: #E1F0F6;
+    border-radius: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  input[type="range"]:hover {
+    background: #B5D7E5;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background: #17A2B8;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(23,162,184,0.6);
+    transition: background-color 0.3s ease;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  input[type="range"]:focus::-webkit-slider-thumb {
+    background: #0B1D3F;
+    box-shadow: 0 5px 12px rgba(11,29,63,0.9);
+    outline: none;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    background: #17A2B8;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(23,162,184,0.6);
+    transition: background-color 0.3s ease;
+  }
+  input[type="range"]:focus::-moz-range-thumb {
+    background: #0B1D3F;
+    box-shadow: 0 5px 12px rgba(11,29,63,0.9);
+    outline: none;
+  }
+  /* Labels */
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    color: #0B1D3F;
+    margin-top: 0.4rem;
+    user-select: none;
+  }
+  
+  /* Contact Section */
+  #contact {
+    text-align: center;
+    font-size: 1.05rem;
+    color: #444;
+    margin-bottom: 4rem;
+    user-select: none;
+  }
+  #contact p {
+    margin: 0.3rem 0;
+  }
+
+  /* Footer */
+  footer {
+    background: #0B1D3F;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-weight: 600;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Our Construction Team</div>
+  <nav id="main-nav">
+    <a href="#services">Services</a>
+    <a href="#details-section">Details</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="btn-cta" id="requestQuoteBtn">Request a Quote</button>
+  <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+<section class="hero" role="banner" aria-label="Main hero section with company tagline">
+  Building & Renovation Experts in London & Surrounding Areas
+  <button class="btn-cta" id="heroRequestQuoteBtn" aria-label="Request a quote button">Request a Quote</button>
+  <p>Your trusted partner for luxury construction, plumbing, electrical, decorating, and more.</p>
+  <p>Our team of seasoned professionals brings together expertise in architecture, civil engineering, 
+    and cutting-edge artificial intelligence to redefine construction excellence in London. With a passion for
+     innovation, we specialize in delivering bespoke building and renovation solutions, seamlessly blending 
+     craftsmanship with technology. Our unique ability to showcase detailed design visualizations before project 
+     execution ensures your vision comes to life with precision and confidence. Committed to quality, sustainability,
+      and client satisfaction, we transform spaces into inspiring environments that stand the test of time.
+</p>
+</section>
+
+<div class="container" id="services" tabindex="0" aria-label="Main service categories">
+  <h2>Our Main Service Categories</h2>
+  <div class="services-grid" id="service-cards" role="list">
+    <!-- Cards inserted by JS -->
+  </div>
+</div>
+
+<div class="container" id="details-section" style="display:none;" tabindex="0" aria-live="polite" aria-atomic="true">
+  <!-- Service detail populated here -->
+</div>
+
+<div class="container" id="contact" tabindex="0" aria-label="Contact information">
+  <h2>Contact Us</h2>
+  <!-- <p>Email: info@ourconstructionteam.com</p> -->
+   <p>Email: Hessam_Taheri@yahoo.com</p>
+  <p>Phone: +44 7586 920 744</p>
+  <p>Serving Greater London and up to 100 miles around</p>
+</div>
+
+<footer role="contentinfo">
+  &copy; 2025 Our Construction Team - All Rights Reserved
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const nav = document.getElementById('main-nav');
+  const hamburger = document.getElementById('hamburger');
+  hamburger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+  hamburger.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      nav.classList.toggle('active');
+      e.preventDefault();
+    }
+  });
+
+  const servicesData = [
+    {
+      id: 'general',
+      title: 'General Construction & Renovation',
+      icon: 'fa-hammer',
+      description: 'House Extensions, Loft Conversions, Garage Conversions, Home Refurbishments and other building works.',
+      subservices: [
+        'House Extensions',
+        'Loft Conversions',
+        'Garage Conversions',
+        'Home Refurbishments'
+      ],
+      beforeImg: './IMG_8996.jpg',
+      afterImg: './IMG_8992.jpg'
+    },
+    {
+      id: 'plumbing',
+      title: 'Plumbing',
+      icon: 'fa-faucet',
+      description: 'General Plumbing, Bathroom Fitters, Emergency Plumbing, Water Tank Installations and repairs.',
+      subservices: [
+        'General Plumbing',
+        'Bathroom Fitters',
+        'Emergency Plumbing',
+        'Water Tank Installations'
+      ],
+      beforeImg: 'https://images.unsplash.com/photo-1580582932221-169bb0a32a43?auto=format&fit=crop&w=800&q=80',
+      afterImg: 'https://images.unsplash.com/photo-1617244533706-6f8a11a9db54?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 'heating',
+      title: 'Heating Systems',
+      icon: 'fa-fire',
+      description: 'Boiler Installations, Boiler Repairs, Radiator Installation, Central Heating Systems.',
+      subservices: [
+        'Boiler Installations',
+        'Boiler Repairs',
+        'Radiator Installation',
+        'Central Heating Systems'
+      ],
+      beforeImg: 'https://images.unsplash.com/photo-1576042081505-89c0f9b0bbd2?auto=format&fit=crop&w=800&q=80',
+      afterImg: 'https://images.unsplash.com/photo-1612715923092-89ce408c0429?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 'locksmith',
+      title: 'Locksmith & Security',
+      icon: 'fa-key',
+      description: 'Emergency Locksmith, Lock Fitting, Security Systems installation and repairs.',
+      subservices: [
+        'Emergency Locksmith',
+        'Lock Fitting',
+        'Security Systems Installation'
+      ],
+      beforeImg: 'https://images.unsplash.com/photo-1581451966296-fb9d4772d5f1?auto=format&fit=crop&w=800&q=80',
+      afterImg: 'https://images.unsplash.com/photo-1611252931954-0ec5e423be2f?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 'electrical',
+      title: 'Electrical',
+      icon: 'fa-bolt',
+      description: 'Rewiring, Fuse Box Installations, Lighting Installations, Electrical Safety Certificates.',
+      subservices: [
+        'Rewiring',
+        'Fuse Box Installations',
+        'Lighting Installations',
+        'Electrical Safety Certificates'
+      ],
+      beforeImg: 'https://images.unsplash.com/photo-1543791184-9c2f78733ec1?auto=format&fit=crop&w=800&q=80',
+      afterImg: 'https://images.unsplash.com/photo-1518238892249-0b1ae3d23648?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 'carpentry',
+      title: 'Carpentry & Joinery',
+      icon: 'fa-hands-helping',
+      description: 'Door Fitting, Kitchen Fitting, Custom Shelving, Staircase Installations.',
+      subservices: [
+        'Door Fitting',
+        'Kitchen Fitting',
+        'Custom Shelving',
+        'Staircase Installations'
+      ],
+      beforeImg: 'https://images.unsplash.com/photo-1527030280862-64139fba04ca?auto=format&fit=crop&w=800&q=80',
+      afterImg: 'https://images.unsplash.com/photo-1524594157366-2af6b09d51f0?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 'roofing',
+      title: 'Roofing & Guttering',
+      icon: 'fa-umbrella',
+      description: 'Roof Repairs, Flat Roofs, Gutter Cleaning, Chimney Repairs and more.',
+      subservices: [
+        'Roof Repairs',
+        'Flat Roof Installation',
+        'Gutter Cleaning',
+        'Chimney Repairs'
+      ],
+      beforeImg: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+      afterImg: 'https://images.unsplash.com/photo-1519821172142-62d924ec2395?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 'painting',
+      title: 'Painting & Decorating',
+      icon: 'fa-paint-roller',
+      description: 'Interior Painting, Wallpapering, Plastering, Exterior Painting.',
+      subservices: [
+        'Interior Painting',
+        'Wallpapering',
+        'Plastering',
+        'Exterior Painting'
+      ],
+      beforeImg: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=80',
+      afterImg: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 'tiling',
+      title: 'Tiling & Flooring',
+      icon: 'fa-th-large',
+      description: 'Wall & Floor Tiling, Bathroom Tiling, Wooden Flooring, Laminate Flooring.',
+      subservices: [
+        'Wall & Floor Tiling',
+        'Bathroom Tiling',
+        'Wooden Flooring',
+        'Laminate Flooring'
+      ],
+      beforeImg: 'https://images.unsplash.com/photo-1556912996-4ad1c67d6c79?auto=format&fit=crop&w=800&q=80',
+      afterImg: 'https://images.unsplash.com/photo-1556912996-74b2fda9a9d2?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 'outdoor',
+      title: 'Outdoor & Landscaping',
+      icon: 'fa-tree',
+      description: 'Garden Decking, Fencing, Patio Installation, Driveways and more.',
+      subservices: [
+        'Garden Decking',
+        'Fencing',
+        'Patio Installation',
+        'Driveways'
+      ],
+      beforeImg: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+      afterImg: 'https://images.unsplash.com/photo-1519821172142-62d924ec2395?auto=format&fit=crop&w=800&q=80'
+    }
+  ];
+
+  const serviceCardsContainer = document.getElementById('service-cards');
+  const detailsSection = document.getElementById('details-section');
+
+  // Generate service cards on homepage
+  servicesData.forEach(service => {
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.tabIndex = 0;
+    card.setAttribute('role', 'listitem');
+    card.setAttribute('aria-label', service.title);
+    card.innerHTML = `
+      <i class="service-icon fa ${service.icon}"></i>
+      <div class="service-title">${service.title}</div>
+    `;
+    card.addEventListener('click', () => {
+      showServiceDetails(service.id);
+      scrollToDetails();
+    });
+    card.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        showServiceDetails(service.id);
+        scrollToDetails();
+        e.preventDefault();
+      }
+    });
+    serviceCardsContainer.appendChild(card);
+  });
+
+  // Show detail section for selected service
+  function showServiceDetails(id) {
+    const service = servicesData.find(s => s.id === id);
+    if(!service) return;
+
+    // Show details container
+    detailsSection.style.display = 'block';
+    detailsSection.innerHTML = `
+      <div class="service-detail" tabindex="0">
+        <h2>${service.title}</h2>
+        <p class="service-desc">${service.description}</p>
+        <div class="subservices-list">
+  ${service.subservices.map((sub,i) => 
+     `<div class="subservice-item" tabindex="0" role="button" aria-pressed="false" data-index="${i}" data-service="${service.id}">${sub}</div>`
+   ).join('')}
+</div>
+        <div class="before-after-wrapper">
+          <img src="${service.beforeImg}" alt="Before ${service.title}" />
+          <div class="after-img" style="width: 50%;">
+            <img src="${service.afterImg}" alt="After ${service.title}" />
+          </div>
+          <div class="slider-container">
+            <input type="range" min="0" max="100" value="50" aria-label="Before and After image slider" />
+            <div class="slider-labels">
+              <span>Before</span>
+              <span>After</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Add event listeners for subservices (alert placeholder)
+    document.querySelectorAll('.subservice-item').forEach(item=>{
+      item.addEventListener('click', (e)=>{
+        alert("Samples for: " + e.target.innerText + " will be added soon!");
+      });
+      item.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' ') {
+          alert("Samples for: " + e.target.innerText + " will be added soon!");
+          e.preventDefault();
+        }
+      });
+    });
+
+    // Before/After slider logic
+    const slider = detailsSection.querySelector('input[type="range"]');
+    const afterImgDiv = detailsSection.querySelector('.after-img');
+    slider.addEventListener('input', () => {
+      afterImgDiv.style.width = slider.value + '%';
+    });
+  }
+
+  // Scroll smoothly to details section on card click
+  function scrollToDetails(){
+    detailsSection.scrollIntoView({behavior:'smooth'});
+  }
+
+  // On page load, show the first service details by default
+  window.addEventListener('DOMContentLoaded', ()=>{
+    showServiceDetails('general');
+  });
+
+  // CTA buttons scroll to contact section
+  const ctaBtns = document.querySelectorAll('#requestQuoteBtn, #heroRequestQuoteBtn');
+  ctaBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+</script>
+</body>
+</html>
