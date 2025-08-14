@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <style>
         /* Reset and basics */
         * { box-sizing: border-box; }
@@ -251,10 +253,6 @@
             color: #0B1D3F;
             font-size: 1rem;
         }
-        .subservice-slider {
-            display: none;
-            margin-top: 2rem;
-        }
         .back-btn {
             background: #17A2B8;
             color: white;
@@ -270,79 +268,62 @@
             outline: none;
         }
 
-        /* Before After Slider */
-        .before-after-wrapper, .subservice-slider {
-            position: relative;
+        /* Swiper Slider Styles */
+        .swiper-container {
             max-width: 1000px;
             margin: 3rem auto;
+            position: relative;
         }
-        .before-after-wrapper img, .subservice-slider img {
+        .swiper-slide img {
             width: 100%;
-            height: auto;
-            display: block;
+            height: 400px;
+            object-fit: cover;
             border-radius: 18px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
-        .after-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            overflow: hidden;
-            border-radius: 18px;
+        .swiper-thumbs {
+            margin-top: 1rem;
         }
-        .after-img img {
-            width: 100%;
-            height: 100%;
+        .swiper-thumbs .swiper-slide {
+            opacity: 0.4;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .swiper-thumbs .swiper-slide img {
+            height: 100px;
             object-fit: cover;
+            border-radius: 8px;
         }
-        .slider-container {
-            margin-top: 1.5rem;
+        .swiper-thumbs .swiper-slide-thumb-active {
+            opacity: 1;
+            border: 2px solid #17A2B8;
         }
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 14px;
-            background: #E1F0F6;
-            border-radius: 14px;
-            outline: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        input[type="range"]:hover { background: #B5D7E5; }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 32px;
-            height: 32px;
-            background: #17A2B8;
+        .swiper-button-next, .swiper-button-prev {
+            color: #17A2B8;
+            background: rgba(255,255,255,0.8);
             border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(23,162,184,0.6);
-            transition: background-color 0.3s ease;
-        }
-        input[type="range"]:focus::-webkit-slider-thumb {
-            background: #0B1D3F;
-            box-shadow: 0 6px 15px rgba(11,29,63,0.9);
-        }
-        input[type="range"]::-moz-range-thumb {
-            width: 32px;
-            height: 32px;
-            background: #17A2B8;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(23,162,184,0.6);
-            transition: background-color 0.3s ease;
-        }
-        input[type="range"]:focus::-moz-range-thumb {
-            background: #0B1D3F;
-            box-shadow: 0 6px 15px rgba(11,29,63,0.9);
-        }
-        .slider-labels {
+            width: 40px;
+            height: 40px;
             display: flex;
-            justify-content: space-between;
-            font-weight: 600;
-            color: #0B1D3F;
-            margin-top: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+        }
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background: #0B1D3F;
+            color: white;
+        }
+        .swiper-pagination {
+            bottom: 10px;
+        }
+        .swiper-pagination-bullet {
+            background: #17A2B8;
+            opacity: 0.6;
+        }
+        .swiper-pagination-bullet-active {
+            background: #0B1D3F;
+            opacity: 1;
         }
         .image-fallback {
             display: none;
@@ -350,6 +331,13 @@
             color: #444;
             font-size: 1.1rem;
             margin-top: 1rem;
+        }
+        .image-label {
+            text-align: center;
+            font-weight: 600;
+            color: #0B1D3F;
+            margin-top: 0.5rem;
+            font-size: 1rem;
         }
 
         /* Contact Section */
@@ -381,12 +369,16 @@
             .hero p { font-size: 1rem; }
             .services-grid { grid-template-columns: 1fr; }
             .service-card { padding: 1.5rem; }
+            .swiper-slide img { height: 300px; }
+            .swiper-thumbs .swiper-slide img { height: 80px; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 2rem; }
             .hero p { font-size: 0.9rem; }
             .container { margin: 2rem auto; }
             h2 { font-size: 2rem; }
+            .swiper-slide img { height: 200px; }
+            .swiper-thumbs .swiper-slide img { height: 60px; }
         }
     </style>
 </head>
@@ -429,6 +421,7 @@
         &copy; 2025 Our Construction Team - All Rights Reserved
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
         const nav = document.getElementById('main-nav');
         const hamburger = document.getElementById('hamburger');
@@ -451,13 +444,80 @@
                 icon: 'fa-hammer',
                 description: 'House Extensions, Loft Conversions, Garage Conversions, Home Refurbishments and other building works.',
                 subservices: [
-                    { name: 'House Extensions', images: { before: './IMG_8996.jpg', after: './IMG_8992.jpg' } } ,
-                    { name: 'Home Conversions', images: { before: './20250413_172539.jpg', after: './20250408_170358.jpg' }, } ,
-                    { name: 'Home Conversions', images: { before: './20250627_210825.jpg', after: './20250701_232008.jpg' }, } ,
-                    { name: '‌Bathroom Conversions', images: { before: './IMG_7667.jpg', after: './IMG_7833.jpg'  }},
-                    { name: 'Kitchen Refurbishments', images: {before: './IMG_7593.jpg', after: './IMG_7599.jpg'  }}
+                    { name: 'House Extensions', images: [
+                        { url: './House Extensions/20250408_170358.jpg', label: 'Before' },
+                        { url: './House Extensions/20250413_172539.jpg', label: 'After' }
+                    ]},
+                    { name: 'House Extensions', images: [
+                        { url: './House Extensions/20250627_210825.jpg', label: 'Before' },
+                        { url: './House Extensions/20250701_232008.jpg', label: 'After' }
+                    ]},
+                    { name: 'Home Conversions', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ]},
+                    { name: 'Room Conversions', images: [
+                        { url: './Room Conversions/IMAGE 2025-08-14 23:15:15.jpg', label: 'Before' },
+                        { url: './Room Conversions/IMAGE 2025-08-14 23:06:52.jpg', label: 'During' },
+                        { url: './Room Conversions/IMAGE 2025-08-14 23:06:51.jpg', label: 'During' },
+                        { url: './Room Conversions/IMAGE 2025-08-14 23:06:47.jpg', label: 'During' },
+                        { url: './Room Conversions/IMAGE 2025-08-14 23:06:45.jpg', label: 'During' },
+                        { url: './Room Conversions/IMAGE 2025-08-14 23:04:25.jpg', label: 'After' }
+                    ]},
+                    { name: 'Room Conversions', images: [
+                        { url: './Room Conversions/IMAGE 2025-08-14 23:05:30.jpg', label: 'Before' },
+                        { url: './Room Conversions/IMAGE 2025-08-14 23:05:31.jpg', label: 'During' },
+                        { url: './Room Conversions/IMAGE 2025-08-14 23:05:33.jpg', label: 'During' },
+                        { url: './Room Conversions/IMAGE 2025-08-14 23:05:35.jpg', label: 'After' }
+                    ]},
+                    { name: 'Bathroom Conversions', images: [
+                        { url: './Bathroom Conversions/IMAGE 2025-08-14 22:58:16.jpg', label: 'Before' },
+                        { url: './Bathroom Conversions/IMAGE 2025-08-14 22:58:10.jpg', label: 'After' }
+                    ]},
+                    { name: 'Bathroom Conversions', images: [
+                        { url: './Bathroom Conversions/IMAGE 2025-08-14 23:04:05.jpg', label: 'Before' },
+                        { url: './Bathroom Conversions/IMAGE 2025-08-14 23:04:07.jpg', label: 'After' }
+                    ]},
+                    { name: 'Bathroom Conversions', images: [
+                        { url: './Bathroom Conversions/IMG_7667.jpg', label: 'Before' },
+                        { url: './Bathroom Conversions/IMG_7833.jpg', label: 'After' }
+                    ]},
+                    { name: 'Bathroom Repair', images: [
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:09:35.jpg', label: 'Before' },
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:09:28.jpg', label: 'During' },
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:09:23.jpg', label: 'During' },
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:09:32.jpg', label: 'After' }
+                    ]},
+                    { name: 'Bathroom Repair', images: [
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:13:04.jpg', label: 'Before' },
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:13:07.jpg', label: 'During' },
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:09:16.jpg', label: 'During' },
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:13:10.jpg', label: 'After' }
+                    ]},
+                    { name: 'Bathroom Repair', images: [
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:24:11.jpg', label: 'Before' },
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:24:40.jpg', label: 'During' },
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:24:13.jpg', label: 'After' }
+                    ]},
+                    { name: 'Bathroom Repair', images: [
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:24:52.jpg', label: 'Before' },
+                        { url: './Bathroom Repair/IMAGE 2025-08-14 23:24:53.jpg', label: 'After' }
+                    ]},
+                    { name: 'Kitchen Refurbishments', images: [
+                        { url: './Kitchen Refurbishments/IMG_7593.jpg', label: 'Before' },
+                        { url: './Kitchen Refurbishments/IMG_7599.jpg', label: 'After' }
+                    ]}
                 ],
-
+                images: [
+                    { url: './design/1.png', label: 'Before' },
+                    { url: './design/2.png', label: 'During' },
+                    { url: './design/29.png', label: 'During' },
+                    { url: './design/30.png', label: 'During' },
+                    { url: './design/43.png', label: 'During' },
+                    { url: './design/44.png', label: 'After' }
+                ]
             },
             {
                 id: 'plumbing',
@@ -465,13 +525,37 @@
                 icon: 'fa-faucet',
                 description: 'General Plumbing, Bathroom Fitters, Emergency Plumbing, Water Tank Installations and repairs.',
                 subservices: [
-                    { name: 'General Plumbing', images: {before: './IMG_8042.jpg', after: './IMG_8043.jpg'  } },
-                    { name: 'Bathroom Fitters', images: null },
-                    { name: 'Emergency Plumbing', images: null },
-                    { name: 'Water Tank Installations', images: null }
+                    { name: 'General Plumbing', images: [
+                        { url: './General Plumbing/IMG_8042.jpg', label: 'Before' },
+                        { url: './General Plumbing/IMG_8043.jpg', label: 'After' }
+                    ]},
+                    { name: 'Bathroom Fitters', images: [
+                        { url: './Bathroom Fitters/IMAGE 2025-08-14 23:14:33.jpg', label: 'Before' },
+                        { url: './Bathroom Fitters/IMAGE 2025-08-14 23:14:32.jpg', label: 'After' }
+                    ] },
+                    { name: 'Bathroom Fitters', images: [
+                        { url: './Bathroom Fitters/20250731_132800.jpg', label: 'Before' },
+                        { url: './Bathroom Fitters/20250731_134731.jpg', label: 'During' },
+                        { url: './Bathroom Fitters/20250731_135654.jpg', label: 'During' },
+                        { url: './Bathroom Fitters/20250731_165754.jpg', label: 'After' }
+                    ] },
+                    { name: 'Emergency Plumbing', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Water Tank Installations', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] }
                 ],
-                beforeImg: 'https://images.unsplash.com/photo-1580582932221-169bb0a32a43?auto=format&fit=crop&w=800&q=80',
-                afterImg: 'https://images.unsplash.com/photo-1617244533706-6f8a11a9db54?auto=format&fit=crop&w=800&q=80'
+                images: [
+                    { url: 'https://images.unsplash.com/photo-1580582932221-169bb0a32a43?auto=format&fit=crop&w=800&q=80', label: 'Before' },
+                    { url: 'https://images.unsplash.com/photo-1617244533706-6f8a11a9db54?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                ]
             },
             {
                 id: 'heating',
@@ -479,13 +563,35 @@
                 icon: 'fa-fire',
                 description: 'Boiler Installations, Boiler Repairs, Radiator Installation, Central Heating Systems.',
                 subservices: [
-                    { name: 'Boiler Installations', images: null },
-                    { name: 'Boiler Repairs', images: null },
-                    { name: 'Radiator Installation', images: null },
-                    { name: 'Central Heating Systems', images: null }
+                    { name: 'Boiler Installations', images: [
+                        { url: './Boiler Installations/IMG_9969.JPG', label: 'Before' },
+                        { url: './Boiler Installations/IMG_9970.JPG', label: 'During' },
+                        { url: './Boiler Installations/IMG_9971.JPG', label: 'During' },
+                        { url: './Boiler Installations/IMG_9972.JPG', label: 'After' }
+                    ] },
+                    { name: 'Radiator Repairs', images: [
+                        { url: './Radiator Repairs/IMG_7879.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Radiator Installation', images: [
+                        { url: './Radiator Installation/IMAGE 2025-08-14 23:23:06.jpg', label: 'Before' },
+                        { url: './Radiator Installation/IMAGE 2025-08-14 23:23:08.jpg', label: 'During' },
+                        { url: './Radiator Installation/IMAGE 2025-08-14 23:23:12.jpg', label: 'During' },
+                        { url: './Radiator Installation/IMAGE 2025-08-14 23:23:21.jpg', label: 'After' }
+                    ] },
+                    { name: 'Central Heating Systems', images: [
+                        { url: './Central Heating Systems/IMG_8713.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] }
                 ],
-                beforeImg: 'https://images.unsplash.com/photo-1576042081505-89c0f9b0bbd2?auto=format&fit=crop&w=800&q=80',
-                afterImg: 'https://images.unsplash.com/photo-1612715923092-89ce408c0429?auto=format&fit=crop&w=800&q=80'
+                images: [
+                    { url: 'https://images.unsplash.com/photo-1576042081505-89c0f9b0bbd2?auto=format&fit=crop&w=800&q=80', label: 'Before' },
+                    { url: 'https://images.unsplash.com/photo-1612715923092-89ce408c0429?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                ]
             },
             {
                 id: 'locksmith',
@@ -493,12 +599,29 @@
                 icon: 'fa-key',
                 description: 'Emergency Locksmith, Lock Fitting, Security Systems installation and repairs.',
                 subservices: [
-                    { name: 'Emergency Locksmith', images: null },
-                    { name: 'Lock Fitting', images: null },
-                    { name: 'Security Systems Installation', images: null }
+                    { name: 'Emergency Locksmith', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Lock Fitting', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Security Systems Installation', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] }
                 ],
-                beforeImg: 'https://images.unsplash.com/photo-1581451966296-fb9d4772d5f1?auto=format&fit=crop&w=800&q=80',
-                afterImg: 'https://images.unsplash.com/photo-1611252931954-0ec5e423be2f?auto=format&fit=crop&w=800&q=80'
+                images: [
+                    { url: 'https://images.unsplash.com/photo-1581451966296-fb9d4772d5f1?auto=format&fit=crop&w=800&q=80', label: 'Before' },
+                    { url: 'https://images.unsplash.com/photo-1611252931954-0ec5e423be2f?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                ]
             },
             {
                 id: 'electrical',
@@ -506,13 +629,35 @@
                 icon: 'fa-bolt',
                 description: 'Rewiring, Fuse Box Installations, Lighting Installations, Electrical Safety Certificates.',
                 subservices: [
-                    { name: 'Rewiring', images: null },
-                    { name: 'Fuse Box Installations', images: null },
-                    { name: 'Lighting Installations', images: null },
-                    { name: 'Electrical Safety Certificates', images: null }
+                    { name: 'Rewiring', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Fuse Box Installations', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Lighting Installations', images: [
+                        { url: './Lighting Installations/20241203_183409.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Electrical Safety Certificates', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] }
                 ],
-                beforeImg: 'https://images.unsplash.com/photo-1543791184-9c2f78733ec1?auto=format&fit=crop&w=800&q=80',
-                afterImg: 'https://images.unsplash.com/photo-1518238892249-0b1ae3d23648?auto=format&fit=crop&w=800&q=80'
+                images: [
+                    { url: 'https://images.unsplash.com/photo-1543791184-9c2f78733ec1?auto=format&fit=crop&w=800&q=80', label: 'Before' },
+                    { url: 'https://images.unsplash.com/photo-1518238892249-0b1ae3d23648?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                ]
             },
             {
                 id: 'carpentry',
@@ -520,13 +665,47 @@
                 icon: 'fa-hands-helping',
                 description: 'Door Fitting, Kitchen Fitting, Custom Shelving, Staircase Installations.',
                 subservices: [
-                    { name: 'Door Fitting', images: null },
-                    { name: 'Kitchen Fitting', images: null },
-                    { name: 'Custom Shelving', images: null },
-                    { name: 'Staircase Installations', images: null }
+                    { name: 'Door Fitting', images: [
+                        { url: './Door Fitting/IMAGE 2025-08-14 22:53:37.jpg', label: 'Before' },
+                        { url: './Door Fitting/IMAGE 2025-08-14 22:53:40.jpg', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Door Fitting/IMAGE 2025-08-14 22:53:12.jpg', label: 'After' }
+                    ] },
+                    { name: 'Assembly', images: [
+                        { url: './Assembly/IMAGE 2025-08-14 23:08:13.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Assembly/IMAGE 2025-08-14 23:08:15.jpg', label: 'After' }
+                    ] },
+                    { name: 'Assembly', images: [
+                        { url: './Assembly/IMAGE 2025-08-14 23:11:03.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Assembly/IMAGE 2025-08-14 23:11:10.jpg', label: 'After' }
+                    ] },
+                    { name: 'Custom Shelving', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Staircase Installations', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Staircase Installations', images: [
+                        { url: './Staircase Installations/IMAGE 2025-08-14 23:13:57.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Staircase Installations/IMAGE 2025-08-14 23:13:56.jpg', label: 'After' }
+                    ] }
                 ],
-                beforeImg: 'https://images.unsplash.com/photo-1527030280862-64139fba04ca?auto=format&fit=crop&w=800&q=80',
-                afterImg: 'https://images.unsplash.com/photo-1524594157366-2af6b09d51f0?auto=format&fit=crop&w=800&q=80'
+                images: [
+                    { url: 'https://images.unsplash.com/photo-1527030280862-64139fba04ca?auto=format&fit=crop&w=800&q=80', label: 'Before' },
+                    { url: 'https://images.unsplash.com/photo-1524594157366-2af6b09d51f0?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                ]
             },
             {
                 id: 'roofing',
@@ -534,13 +713,35 @@
                 icon: 'fa-umbrella',
                 description: 'Roof Repairs, Flat Roofs, Gutter Cleaning, Chimney Repairs and more.',
                 subservices: [
-                    { name: 'Roof Repairs', images: null },
-                    { name: 'Flat Roof Installation', images: null },
-                    { name: 'Gutter Cleaning', images: null },
-                    { name: 'Chimney Repairs', images: null }
+                    { name: 'Roof Repairs', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Flat Roof Installation', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Gutter Cleaning', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Chimney Repairs', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] }
                 ],
-                beforeImg: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
-                afterImg: 'https://images.unsplash.com/photo-1519821172142-62d924ec2395?auto=format&fit=crop&w=800&q=80'
+                images: [
+                    { url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80', label: 'Before' },
+                    { url: 'https://images.unsplash.com/photo-1519821172142-62d924ec2395?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                ]
             },
             {
                 id: 'painting',
@@ -548,13 +749,56 @@
                 icon: 'fa-paint-roller',
                 description: 'Interior Painting, Wallpapering, Plastering, Exterior Painting.',
                 subservices: [
-                    { name: 'Interior Painting', images: null },
-                    { name: 'Wallpapering', images: null },
-                    { name: 'Plastering', images: null },
-                    { name: 'Exterior Painting', images: null }
+                    { name: 'Interior Painting', images: [
+                        { url: './Interior Painting/IMAGE 2025-08-14 23:14:42.jpg', label: 'Before' },
+                        { url: './Interior Painting/IMAGE 2025-08-14 23:14:41.jpg', label: 'During' },
+                        { url: './Interior Painting/IMAGE 2025-08-14 23:14:43.jpg', label: 'During' },
+                        { url: './Interior Painting/IMAGE 2025-08-14 23:14:45.jpg', label: 'During' },
+                        { url: './Interior Painting/IMAGE 2025-08-14 23:11:21.jpg', label: 'During' },
+                        { url: './Interior Painting/IMAGE 2025-08-14 23:11:23.jpg', label: 'After' }
+                    ] },
+                    { name: 'Interior Repainting', images: [
+                        { url: './Interior Painting/IMAGE 2025-08-14 23:14:17.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Interior Painting/IMAGE 2025-08-14 23:14:16.jpg', label: 'After' }
+                    ] },
+                    { name: 'Wallpapering', images: [
+                        { url: './Wallpapering/IMAGE 2025-08-14 22:56:39.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Wallpapering/IMAGE 2025-08-14 22:56:43.jpg', label: 'After' }
+                    ] },
+                    { name: 'Plastering', images: [
+                        { url: './Plastering/IMAGE 2025-08-14 23:10:33.jpg', label: 'Before' },
+                        { url: './Plastering/IMAGE 2025-08-14 23:10:35.jpg', label: 'During' },
+                        { url: './Plastering/IMAGE 2025-08-14 23:10:40.jpg', label: 'During' },
+                        { url: './Plastering/IMAGE 2025-08-14 23:10:34.jpg', label: 'During' },
+                        { url: './Plastering/IMAGE 2025-08-14 23:10:38.jpg', label: 'After' }
+                    ] },
+                    { name: 'Mounting', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Mounting/20250305_133311.jpg', label: 'After' }
+                    ] },
+                    { name: 'Mounting', images: [
+                        { url: './Mounting/IMAGE 2025-08-14 23:14:58.jpg', label: 'Before' },
+                        { url: './Mounting/IMAGE 2025-08-14 23:14:57.jpg', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Mounting/IMAGE 2025-08-14 23:14:59.jpg', label: 'After' }
+                    ] },
+                    { name: 'windows', images: [
+                        { url: './windows/IMAGE 2025-08-14 23:00:35.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './windows/IMAGE 2025-08-14 23:00:33.jpg', label: 'After' }
+                    ] }
                 ],
-                beforeImg: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=80',
-                afterImg: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80'
+                images: [
+                    { url: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=80', label: 'Before' },
+                    { url: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                ]
             },
             {
                 id: 'tiling',
@@ -562,13 +806,43 @@
                 icon: 'fa-th-large',
                 description: 'Wall & Floor Tiling, Bathroom Tiling, Wooden Flooring, Laminate Flooring.',
                 subservices: [
-                    { name: 'Wall & Floor Tiling', images: null },
-                    { name: 'Bathroom Tiling', images: null },
-                    { name: 'Wooden Flooring', images: null },
-                    { name: 'Laminate Flooring', images: null }
+                    { name: 'Wall & Floor Tiling', images: [
+                        { url: './Wall & Floor Tiling/IMAGE 2025-08-14 23:00:58.jpg', label: 'Before' },
+                        { url: './Wall & Floor Tiling/IMAGE 2025-08-14 23:01:06.jpg', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Wall & Floor Tiling/IMAGE 2025-08-14 23:01:09.jpg', label: 'After' }
+                    ] },
+                    { name: 'Wall & Floor Tiling', images: [
+                        { url: './Wall & Floor Tiling/IMAGE 2025-08-14 23:05:49.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Wall & Floor Tiling/IMAGE 2025-08-14 23:05:52.jpg', label: 'After' }
+                    ] },
+                    { name: 'Bathroom Tiling', images: [
+                        { url: './Bathroom Tiling/IMAGE 2025-08-14 23:05:08.jpg', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        { url: './Bathroom Tiling/IMAGE 2025-08-14 23:05:10.jpg', label: 'After' }
+                    ] },
+                    { name: 'Wooden Flooring', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Laminate Flooring', images: [
+                        { url: './Laminate Flooring/IMAGE 2025-08-14 22:58:41.jpg', label: 'Before' },
+                        { url: './Laminate Flooring/IMAGE 2025-08-14 22:58:37.jpg', label: 'During' },
+                        { url: './Laminate Flooring/IMAGE 2025-08-14 23:25:16.jpg', label: 'During' },
+                        { url: './Laminate Flooring/IMAGE 2025-08-14 23:25:12.jpg', label: 'During' },
+                        { url: './Laminate Flooring/IMAGE 2025-08-14 23:25:17.jpg', label: 'During' },
+                        { url: './Laminate Flooring/IMAGE 2025-08-14 23:25:13.jpg', label: 'After' }
+                    ] }
                 ],
-                beforeImg: 'https://images.unsplash.com/photo-1556912996-4ad1c67d6c79?auto=format&fit=crop&w=800&q=80',
-                afterImg: 'https://images.unsplash.com/photo-1556912996-74b2fda9a9d2?auto=format&fit=crop&w=80'
+                images: [
+                    { url: 'https://images.unsplash.com/photo-1556912996-4ad1c67d6c79?auto=format&fit=crop&w=800&q=80', label: 'Before' },
+                    { url: 'https://images.unsplash.com/photo-1556912996-74b2fda9a9d2?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                ]
             },
             {
                 id: 'outdoor',
@@ -576,13 +850,35 @@
                 icon: 'fa-tree',
                 description: 'Garden Decking, Fencing, Patio Installation, Driveways and more.',
                 subservices: [
-                    { name: 'Garden Decking', images: null },
-                    { name: 'Fencing', images: null },
-                    { name: 'Patio Installation', images: null },
-                    { name: 'Driveways', images: null }
+                    { name: 'Garden Decking', images: [
+                        { url: './Garden Decking/IMG_8996.jpg', label: 'Before' },
+                        { url: './Garden Decking/IMG_8982.jpg', label: 'During' },
+                        { url: './Garden Decking/IMG_8986.jpg', label: 'During' },
+                        { url: './Garden Decking/IMG_8992.jpg', label: 'After' }
+                    ] },
+                    { name: 'Fencing', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Patio Installation', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] },
+                    { name: 'Driveways', images: [
+                        // { url: '.', label: 'Before' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'During' },
+                        // { url: '.', label: 'After' }
+                    ] }
                 ],
-                beforeImg: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
-                afterImg: 'https://images.unsplash.com/photo-1519821172142-62d924ec2395?auto=format&fit=crop&w=800&q=80'
+                images: [
+                    { url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80', label: 'Before' },
+                    { url: 'https://images.unsplash.com/photo-1519821172142-62d924ec2395?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                ]
             }
         ];
 
@@ -633,114 +929,140 @@
                     <div class="subservice-message" id="subservice-message-${service.id}">
                         Samples for this service will be added soon!
                     </div>
-                    <div class="subservice-slider" id="subservice-slider-${service.id}"></div>
-                    <div class="before-after-wrapper">
-                        <img src="${service.beforeImg}" alt="Before ${service.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-                        <div class="image-fallback">Image not available</div>
-                        <div class="after-img" style="width: 50%;">
-                            <img src="${service.afterImg}" alt="After ${service.title}" onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.nextElementSibling.style.display='block';">
+                    <div class="swiper-container" id="main-slider-${service.id}">
+                        <div class="swiper-wrapper">
+                            ${service.images.map(img => `
+                                <div class="swiper-slide">
+                                    <img src="${img.url}" alt="${img.label} ${service.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                                    <div class="image-fallback">Image not available</div>
+                                    <div class="image-label">${img.label}</div>
+                                </div>
+                            `).join('')}
                         </div>
-                        <div class="image-fallback">Image not available</div>
-                        <div class="slider-container">
-                            <input type="range" min="0" max="100" value="50" aria-label="Before and After image slider for ${service.title}">
-                            <div class="slider-labels">
-                                <span>Before</span>
-                                <span>After</span>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-thumbs" id="thumbs-slider-${service.id}">
+                            <div class="swiper-wrapper">
+                                ${service.images.map(img => `
+                                    <div class="swiper-slide">
+                                        <img src="${img.url}" alt="Thumbnail for ${img.label} ${service.title}">
+                                    </div>
+                                `).join('')}
                             </div>
                         </div>
                     </div>
                 </div>
             `;
 
+            // Initialize Swiper for main service slider
+            const mainSwiper = new Swiper(`#main-slider-${service.id}`, {
+                loop: service.images.length > 1,
+                slidesPerView: 1,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: `.swiper-button-next`,
+                    prevEl: `.swiper-button-prev`,
+                },
+                pagination: {
+                    el: `.swiper-pagination`,
+                    clickable: true,
+                },
+                thumbs: {
+                    swiper: new Swiper(`#thumbs-slider-${service.id}`, {
+                        loop: service.images.length > 1,
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                        watchSlidesProgress: true,
+                        slideToClickedSlide: true,
+                    })
+                },
+                effect: 'fade',
+                fadeEffect: { crossFade: true },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+            });
+
             // Add event listeners for subservices
             document.querySelectorAll('.subservice-item').forEach(item => {
                 item.addEventListener('click', (e) => {
-                    const serviceId = e.target.dataset.service;
-                    const index = e.target.dataset.index;
-                    const subservice = servicesData.find(s => s.id === serviceId).subservices[index];
-                    const sliderContainer = document.getElementById(`subservice-slider-${serviceId}`);
-                    const message = document.getElementById(`subservice-message-${serviceId}`);
-
-                    if (subservice.images) {
-                        sliderContainer.style.display = 'block';
-                        message.style.display = 'none';
-                        sliderContainer.innerHTML = `
-                            <div class="before-after-wrapper">
-                                <img src="${subservice.images.before}" alt="Before ${subservice.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-                                <div class="image-fallback">Image not available</div>
-                                <div class="after-img" style="width: 50%;">
-                                    <img src="${subservice.images.after}" alt="After ${subservice.name}" onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.nextElementSibling.style.display='block';">
-                                </div>
-                                <div class="image-fallback">Image not available</div>
-                                <div class="slider-container">
-                                    <input type="range" min="0" max="100" value="50" aria-label="Before and After image slider for ${subservice.name}">
-                                    <div class="slider-labels">
-                                        <span>Before</span>
-                                        <span>After</span>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        const slider = sliderContainer.querySelector('input[type="range"]');
-                        const afterImgDiv = sliderContainer.querySelector('.after-img');
-                        slider.addEventListener('input', () => {
-                            afterImgDiv.style.width = slider.value + '%';
-                        });
-                    } else {
-                        message.style.display = 'block';
-                        sliderContainer.style.display = 'none';
-                        setTimeout(() => { message.style.display = 'none'; }, 3000);
-                    }
+                    handleSubserviceClick(e.target.dataset.service, e.target.dataset.index);
                 });
                 item.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
-                        const serviceId = e.target.dataset.service;
-                        const index = e.target.dataset.index;
-                        const subservice = servicesData.find(s => s.id === serviceId).subservices[index];
-                        const sliderContainer = document.getElementById(`subservice-slider-${serviceId}`);
-                        const message = document.getElementById(`subservice-message-${serviceId}`);
-
-                        if (subservice.images) {
-                            sliderContainer.style.display = 'block';
-                            message.style.display = 'none';
-                            sliderContainer.innerHTML = `
-                                <div class="before-after-wrapper">
-                                    <img src="${subservice.images.before}" alt="Before ${subservice.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-                                    <div class="image-fallback">Image not available</div>
-                                    <div class="after-img" style="width: 50%;">
-                                        <img src="${subservice.images.after}" alt="After ${subservice.name}" onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.nextElementSibling.style.display='block';">
-                                    </div>
-                                    <div class="image-fallback">Image not available</div>
-                                    <div class="slider-container">
-                                        <input type="range" min="0" max="100" value="50" aria-label="Before and After image slider for ${subservice.name}">
-                                        <div class="slider-labels">
-                                            <span>Before</span>
-                                            <span>After</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                            const slider = sliderContainer.querySelector('input[type="range"]');
-                            const afterImgDiv = sliderContainer.querySelector('.after-img');
-                            slider.addEventListener('input', () => {
-                                afterImgDiv.style.width = slider.value + '%';
-                            });
-                        } else {
-                            message.style.display = 'block';
-                            sliderContainer.style.display = 'none';
-                            setTimeout(() => { message.style.display = 'none'; }, 3000);
-                        }
+                        handleSubserviceClick(e.target.dataset.service, e.target.dataset.index);
                         e.preventDefault();
                     }
                 });
             });
 
-            // Before/After slider logic for main service
-            const slider = detailsSection.querySelector('.before-after-wrapper input[type="range"]');
-            const afterImgDiv = detailsSection.querySelector('.before-after-wrapper .after-img');
-            slider.addEventListener('input', () => {
-                afterImgDiv.style.width = slider.value + '%';
-            });
+            function handleSubserviceClick(serviceId, index) {
+                const subservice = servicesData.find(s => s.id === serviceId).subservices[index];
+                const message = document.getElementById(`subservice-message-${serviceId}`);
+                const mainSliderContainer = document.getElementById(`main-slider-${serviceId}`);
+
+                if (subservice.images && subservice.images.length > 0) {
+                    message.style.display = 'none';
+                    mainSliderContainer.innerHTML = `
+                        <div class="swiper-wrapper">
+                            ${subservice.images.map(img => `
+                                <div class="swiper-slide">
+                                    <img src="${img.url}" alt="${img.label} ${subservice.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                                    <div class="image-fallback">Image not available</div>
+                                    <div class="image-label">${img.label}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-thumbs" id="thumbs-slider-${serviceId}-${index}">
+                            <div class="swiper-wrapper">
+                                ${subservice.images.map(img => `
+                                    <div class="swiper-slide">
+                                        <img src="${img.url}" alt="Thumbnail for ${img.label} ${subservice.name}">
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+
+                    const subSwiper = new Swiper(`#main-slider-${serviceId}`, {
+                        loop: subservice.images.length > 1,
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                        navigation: {
+                            nextEl: `.swiper-button-next`,
+                            prevEl: `.swiper-button-prev`,
+                        },
+                        pagination: {
+                            el: `.swiper-pagination`,
+                            clickable: true,
+                        },
+                        thumbs: {
+                            swiper: new Swiper(`#thumbs-slider-${serviceId}-${index}`, {
+                                loop: subservice.images.length > 1,
+                                slidesPerView: 3,
+                                spaceBetween: 10,
+                                watchSlidesProgress: true,
+                                slideToClickedSlide: true,
+                            })
+                        },
+                        effect: 'fade',
+                        fadeEffect: { crossFade: true },
+                        autoplay: {
+                            delay: 5000,
+                            disableOnInteraction: false,
+                        },
+                    });
+                } else {
+                    message.style.display = 'block';
+                    mainSliderContainer.innerHTML = '';
+                    setTimeout(() => { message.style.display = 'none'; }, 3000);
+                }
+            }
         }
 
         // Hide service details
