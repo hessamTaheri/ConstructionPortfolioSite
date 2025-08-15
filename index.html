@@ -11,415 +11,428 @@
     <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <style>
-/* Reset and basics */
-* { box-sizing: border-box; }
-body {
-    margin: 0;
-    font-family: 'Merriweather', serif;
-    background: #FAFAFA;
-    color: #222222;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-a {
-    text-decoration: none;
-    color: #17A2B8;
-    transition: color 0.3s ease;
-}
-a:hover, a:focus { color: #0B1D3F; }
-html { scroll-behavior: smooth; }
+        /* Reset and basics */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Merriweather', serif;
+            background: #FAFAFA;
+            color: #222222;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a {
+            text-decoration: none;
+            color: #17A2B8;
+            transition: color 0.3s ease;
+        }
+        a:hover, a:focus { color: #0B1D3F; }
+        html { scroll-behavior: smooth; }
 
-/* Header */
-header {
-    background: #0B1D3F;
-    color: white;
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 0;
-    z-index: 10000;
-    box-shadow: 0 2px 8px rgba(11, 29, 63, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.logo {
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: 1.5px;
-    user-select: none;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-nav {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-}
-nav a {
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: #17A2B8;
-}
-nav a:hover, nav a:focus { color: #FAFAFA; }
-.btn-cta {
-    background-color: #17A2B8;
-    border: none;
-    color: white;
-    font-weight: 700;
-    padding: 0.6rem 1.5rem;
-    border-radius: 30px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    margin-left: 2rem;
-    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.4);
-    user-select: none;
-}
-.btn-cta:hover, .btn-cta:focus {
-    background-color: #0B1D3F;
-    box-shadow: 0 6px 20px rgba(11, 29, 63, 0.8);
-    outline: none;
-}
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-}
-.hamburger span {
-    height: 3px;
-    width: 25px;
-    background: white;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
+        /* Header */
+        header {
+            background: #0B1D3F;
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 10000;
+            box-shadow: 0 2px 8px rgba(11, 29, 63, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1.5px;
+            user-select: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        nav a {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #17A2B8;
+        }
+        nav a:hover, nav a:focus { color: #FAFAFA; }
+        .btn-cta {
+            background-color: #17A2B8;
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            margin-left: 2rem;
+            box-shadow: 0 4px 12px rgba(23, 162, 184, 0.4);
+            user-select: none;
+        }
+        .btn-cta:hover, .btn-cta:focus {
+            background-color: #0B1D3F;
+            box-shadow: 0 6px 20px rgba(11, 29, 63, 0.8);
+            outline: none;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger span {
+            height: 3px;
+            width: 25px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
 
-/* Mobile nav */
+        /* Mobile nav */
 @media (max-width: 768px) {
+    header {
+        padding: 0.56rem 1.4rem; /* تغییر از 1rem 2rem به 70% از مقدار فعلی (0.7 * 0.8rem ≈ 0.56rem و 0.7 * 2rem ≈ 1.4rem) */
+    }
     nav {
         position: fixed;
-        top: 70px;
+        top: 49px; /* تغییر از 70px به 70% از مقدار فعلی (0.7 * 70 ≈ 49px) */
         right: 0;
         background: #0B1D3F;
-        height: calc(100% - 70px);
-        width: 250px;
+        height: calc(100% - 49px); /* تغییر از calc(100% - 70px) به 70% از مقدار قبلی */
+        width: 175px; /* تغییر از 250px به 70% از مقدار فعلی (0.7 * 250 ≈ 175px) */
         flex-direction: column;
         transform: translateX(100%);
         transition: transform 0.3s ease;
-        padding-top: 2rem;
+        padding-top: 1rem; /* تغییر از 2rem به 70% از مقدار فعلی (0.7 * 2 ≈ 1.4rem) */
         z-index: 10000;
     }
     nav.active { transform: translateX(0); }
-    nav a { margin: 1.5rem; font-size: 1.2rem; }
+    nav a { margin: 1.05rem; font-size: 0.77rem; /* تغییر از 1.5rem و 1.1rem به 70% از مقدار فعلی */ }
     .hamburger { display: flex; }
-    .btn-cta { margin: 1.5rem; }
+    .btn-cta { margin: 1.05rem; font-size: 0.63rem; padding: 0.35rem 0.84rem; /* تغییر از 1.5rem, 0.9rem, 0.5rem 1.2rem به 70% */ }
 }
 
-/* Hero Section */
-.hero {
-    background: linear-gradient(rgba(11,29,63,0.75), rgba(11,29,63,0.75)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1470&q=80') no-repeat center/cover;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-    padding: 0 2rem;
-    user-select: none;
-}
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-.hero p {
-    font-size: 1.25rem;
-    font-weight: 400;
-    max-width: 1000px;
-    letter-spacing: 0.3px;
-}
-.hero .btn-cta {
-    margin-top: 2rem;
-    font-size: 1.15rem;
-    padding: 0.8rem 2.2rem;
-    box-shadow: 0 6px 25px rgba(23, 162, 184, 0.5);
-}
-.hero .btn-cta:hover, .hero .btn-cta:focus {
-    box-shadow: 0 8px 30px rgba(11, 29, 63, 0.9);
-}
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(11, 29, 63, 0.407), rgba(11, 29, 63, 0.775)), url('./design/29.png') no-repeat center/cover;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 2rem;
+            user-select: none;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            padding: 1px;
+            margin: auto;
+            font-size: 1rem;
+            font-weight: 400;
+            max-width: 1000px;
+            letter-spacing: 0.3px;
+        }
+        .hero .btn-cta {
+            margin-top: 2rem;
+            font-size: 1.15rem;
+            padding: 0.8rem 2.2rem;
+            box-shadow: 0 6px 25px rgba(23, 162, 184, 0.5);
+        }
+        .hero .btn-cta:hover, .hero .btn-cta:focus {
+            box-shadow: 0 8px 30px rgba(11, 29, 63, 0.9);
+        }
 
-/* Container */
-.container {
-    max-width: 1280px;
-    margin: 4rem auto;
-    padding: 0 1.5rem;
-}
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 4rem auto;
+            padding: 0 1.5rem;
+        }
 
-/* Section Titles */
-h2 {
-    color: #0B1D3F;
-    font-weight: 700;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    user-select: none;
-}
+        /* Section Titles */
+        h2 {
+            color: #0B1D3F;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            user-select: none;
+        }
 
-/* Services Grid */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2.5rem;
-}
-.service-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease;
-}
-.service-card:hover, .service-card:focus {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    outline: none;
-}
-.service-icon {
-    font-size: 4rem;
-    color: #17A2B8;
-    margin-bottom: 1.2rem;
-}
-.service-title {
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: #0B1D3F;
-}
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .service-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease;
+        }
+        .service-card:hover, .service-card:focus {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+            outline: none;
+        }
+        .service-icon {
+            font-size: 3rem;
+            color: #17A2B8;
+            margin-bottom: 1rem;
+        }
+        .service-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #0B1D3F;
+        }
 
-/* Service Detail Section */
-.service-detail {
-    background: white;
-    padding: 3rem;
-    border-radius: 18px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-    margin-bottom: 4rem;
-}
-.service-desc {
-    font-weight: 400;
-    color: #444;
-    font-size: 1.1rem;
-    margin-bottom: 2.5rem;
-    line-height: 1.6;
-}
-.subservices-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.2rem;
-}
-.subservice-item {
-    flex: 1 1 200px;
-    background: #E1F0F6;
-    border-radius: 12px;
-    padding: 1.2rem;
-    font-weight: 600;
-    color: #0B1D3F;
-    box-shadow: 0 3px 10px rgba(23,162,184,0.3);
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-.subservice-item:hover, .subservice-item:focus {
-    background-color: #17A2B8;
-    color: white;
-    outline: none;
-}
-.subservice-message {
-    display: none;
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background: #E1F0F6;
-    border-radius: 12px;
-    text-align: center;
-    color: #0B1D3F;
-    font-size: 1rem;
-}
-.back-btn {
-    background: #17A2B8;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 30px;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    display: inline-block;
-    transition: background-color 0.3s ease;
-}
-.back-btn:hover, .back-btn:focus {
-    background: #0B1D3F;
-    outline: none;
-}
+        /* Service Detail Section */
+        .service-detail {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        .service-desc {
+            font-weight: 400;
+            color: #444;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .subservices-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .subservice-item {
+            flex: 1 1 150px;
+            background: #E1F0F6;
+            border-radius: 10px;
+            padding: 1rem;
+            font-weight: 600;
+            color: #0B1D3F;
+            box-shadow: 0 3px 8px rgba(23,162,184,0.3);
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .subservice-item:hover, .subservice-item:focus {
+            background-color: #17A2B8;
+            color: white;
+            outline: none;
+        }
+        .subservice-message {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: #E1F0F6;
+            border-radius: 10px;
+            text-align: center;
+            color: #0B1D3F;
+            font-size: 0.9rem;
+        }
+        .back-btn {
+            background: #17A2B8;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .back-btn:hover, .back-btn:focus {
+            background: #0B1D3F;
+            outline: none;
+        }
 
-/* Swiper Slider Styles */
-.swiper-container {
-    max-width: 1000px;
-    margin: 3rem auto;
-    position: relative;
-    height: auto; /* ارتفاع دینامیک برای سازگاری با تصاویر */
-}
-.swiper-slide {
-    background: #f5f5f5; /* پس‌زمینه برای پر کردن فضای خالی اطراف تصاویر */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-}
-.swiper-slide img {
-    width: 100%;
-    max-height: 400px; /* حداکثر ارتفاع برای تصاویر */
-    object-fit: contain; /* نمایش کامل تصویر بدون برش */
-    border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    display: block;
-    margin: 0 auto;
-}
-.swiper-thumbs {
-    margin-top: 1rem;
-}
-.swiper-thumbs .swiper-slide {
-    opacity: 0.4;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-}
-.swiper-thumbs .swiper-slide img {
-    width: 100%;
-    max-height: 100px; /* حداکثر ارتفاع برای تصاویر کوچک */
-    object-fit: contain; /* نمایش کامل تصویر بدون برش */
-    border-radius: 8px;
-    display: block;
-    margin: 0 auto;
-}
-.swiper-thumbs .swiper-slide-thumb-active {
-    opacity: 1;
-    border: 2px solid #17A2B8;
-}
-.swiper-button-next, .swiper-button-prev {
-    color: #17A2B8;
-    background: rgba(255,255,255,0.8);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease;
-}
-.swiper-button-next:hover, .swiper-button-prev:hover {
-    background: #0B1D3F;
-    color: white;
-}
-.swiper-pagination {
-    bottom: 10px;
-}
-.swiper-pagination-bullet {
-    background: #17A2B8;
-    opacity: 0.6;
-}
-.swiper-pagination-bullet-active {
-    background: #0B1D3F;
-    opacity: 1;
-}
-.image-fallback {
-    display: none;
-    text-align: center;
-    color: #444;
-    font-size: 1.1rem;
-    margin-top: 1rem;
-}
-.image-label {
-    text-align: center;
-    font-weight: 600;
-    color: #0B1D3F;
-    margin-top: 0.5rem;
-    font-size: 1rem;
-}
+        /* Swiper Slider Styles */
+        .swiper-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            position: relative;
+            height: auto;
+        }
+        .swiper-slide {
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        .swiper-slide img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            display: block;
+            margin: 0 auto;
+        }
+        .swiper-thumbs {
+            margin-top: 0.8rem;
+        }
+        .swiper-thumbs .swiper-slide {
+            opacity: 0.4;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .swiper-thumbs .swiper-slide img {
+            width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        .swiper-thumbs .swiper-slide-thumb-active {
+            opacity: 1;
+            border: 2px solid #17A2B8;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: #17A2B8;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+        }
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background: #0B1D3F;
+            color: white;
+        }
+        .swiper-pagination {
+            bottom: 10px;
+        }
+        .swiper-pagination-bullet {
+            background: #17A2B8;
+            opacity: 0.6;
+        }
+        .swiper-pagination-bullet-active {
+            background: #0b1d3f;
+            opacity: 1;
+        }
+        .image-fallback {
+            display: none;
+            text-align: center;
+            color: #444;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+        .image-label {
+            text-align: center;
+            font-weight: 600;
+            color: #0B1D3F;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
 
-/* Contact Section */
-#contact {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #444;
-    margin-bottom: 5rem;
-}
-#contact p {
-    margin: 0.5rem 0;
-}
-#contact a { font-weight: 600; }
+        /* Contact Section */
+        #contact {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 4rem;
+        }
+        #contact p {
+            margin: 0.5rem 0;
+        }
+        #contact a { font-weight: 600; }
 
-/* Footer */
-footer {
-    background: #0B1D3F;
-    color: white;
-    text-align: center;
-    padding: 2rem 1rem;
-    font-weight: 600;
-    user-select: none;
-}
+        /* Footer */
+        footer {
+            background: #0B1D3F;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-weight: 600;
+            user-select: none;
+        }
 
-/* Responsive Adjustments */
-@media (max-width: 1024px) {
-    .hero { height: 65vh; }
-    .hero h1 { font-size: 3rem; }
-    .hero p { font-size: 1.1rem; }
-    .swiper-slide img {
-        max-height: 350px; /* کاهش ارتفاع برای تبلت‌ها */
-        object-fit: contain;
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .hero { height: 65vh; }
+            .hero h1 { font-size: 3rem; }
+            .hero p { font-size: 1.1rem; }
+            .swiper-slide img { max-height: 450px; }
+            .swiper-thumbs .swiper-slide img { max-height: 100px; }
+            .service-card { padding: 1.2rem; }
+            .service-icon { font-size: 2.5rem; }
+            .service-title { font-size: 1.2rem; }
+            .subservice-item { padding: 0.8rem; font-size: 0.9rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { height: 60vh; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1rem; }
+            .services-grid {
+        grid-template-columns: repeat(3, minmax(100px, 1fr)); /* تغییر به 3 ستون با حداقل عرض 100px برای موبایل */
+        gap: 1rem;
     }
-    .swiper-thumbs .swiper-slide img {
-        max-height: 90px;
-        object-fit: contain;
-    }
-}
+            .service-card { padding: 1rem; }
+            .service-icon { font-size: 2rem; }
+            .service-title { font-size: 1.1rem; }
+            .service-detail { padding: 1.5rem; }
+            .subservices-list { gap: 0.8rem; }
+            .subservice-item { flex: 1 1 120px; padding: 0.6rem; font-size: 0.85rem; }
+            .swiper-slide img { max-height: 400px; }
+            .swiper-thumbs .swiper-slide img { max-height: 80px; }
+            .swiper-thumbs .swiper-slide { width: 80px !important; }
+            h2 { font-size: 2rem; }
+            .back-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
+        }
 
-@media (max-width: 768px) {
-    .hero { height: 60vh; }
-    .hero h1 { font-size: 2.5rem; }
-    .hero p { font-size: 1rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .service-card { padding: 1.5rem; }
-    .swiper-slide img {
-        max-height: 300px; /* کاهش ارتفاع برای موبایل */
-        object-fit: contain;
-    }
-    .swiper-thumbs .swiper-slide img {
-        max-height: 80px;
-        object-fit: contain;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h1 { font-size: 2rem; }
-    .hero p { font-size: 0.9rem; }
-    .container { margin: 2rem auto; }
-    h2 { font-size: 2rem; }
-    .swiper-slide img {
-        max-height: 200px; /* کاهش بیشتر برای دستگاه‌های کوچک */
-        object-fit: contain;
-    }
-    .swiper-thumbs .swiper-slide img {
-        max-height: 60px;
-        object-fit: contain;
-    }
-}
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 0.9rem; }
+            .container { margin: 2rem auto; padding: 0 1rem; }
+            h2 { font-size: 1.8rem; }
+            .service-card { padding: 0.8rem; }
+            .service-icon { font-size: 1.8rem; }
+            .service-title { font-size: 1rem; }
+            .subservice-item { flex: 1 1 100px; padding: 0.5rem; font-size: 0.8rem; }
+            .swiper-slide img { max-height: 350px; }
+            .swiper-thumbs .swiper-slide img { max-height: 60px; }
+            .swiper-thumbs .swiper-slide { width: 60px !important; }
+            .back-btn { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+            .service-desc { font-size: 0.9rem; }
+            .subservice-message { font-size: 0.85rem; }
+            .image-label { font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body>
@@ -437,14 +450,15 @@ footer {
     </header>
 
     <section class="hero" role="banner" aria-label="Main hero section with company tagline">
-        <h1>Building & Renovation Experts in London</h1>
+        <h1>       <br/>       <br/>Building & Renovation Experts in London</h1>
         <p>Your trusted partner for luxury construction, plumbing, electrical, decorating, and more.</p>
-        <p>Our team of seasoned professionals brings together expertise in architecture, civil engineering, and cutting-edge artificial intelligence to redefine construction excellence in London. With a passion for innovation, we specialize in delivering bespoke building and renovation solutions, seamlessly blending craftsmanship with technology. Our unique ability to showcase detailed design visualizations before project execution ensures your vision comes to life with precision and confidence. Committed to quality, sustainability, and client satisfaction, we transform spaces into inspiring environments that stand the test of time.</p>
-        <a href="mailto:Hessam_Taheri@yahoo.com?subject=Quote%20Request%20-%20Our%20Construction%20Team&body=Dear%20Team,%0D%0A%0D%0AI%20am%20interested%20in%20requesting%20a%20quote%20for%20your%20services.%20Please%20provide%20details%20about%20your%20availability%20and%20pricing.%0D%0A%0D%0ABest%20regards,%0D%0A[Your%20Name]" class="btn-cta" aria-label="Request a Quote">Request a Quote</a>
+        <p>Our team of seasoned professionals brings together expertise in architecture, civil engineering, and cutting-edge artificial intelligence to redefine construction excellence in London. With a passion for innovation, we specialize in delivering bespoke building and renovation solutions, seamlessly blending craftsmanship with technology. Our unique ability to showcase detailed design visualizations before project execution ensures your vision comes to life with precision and confidence. Committed to quality, sustainability, and client satisfaction, we transform spaces into inspiring environments that stand the test of time.<br/><br/><br/><br/><br/><br/></p>
+        <!-- <a href="mailto:Hessam_Taheri@yahoo.com?subject=Quote%20Request%20-%20Our%20Construction%20Team&body=Dear%20Team,%0D%0A%0D%0AI%20am%20interested%20in%20requesting%20a%20quote%20for%20your%20services.%20Please%20provide%20details%20about%20your%20availability%20and%20pricing.%0D%0A%0D%0ABest%20regards,%0D%0A[Your%20Name]" class="btn-cta" aria-label="Request a Quote">Request a Quote</a> -->
     </section>
 
     <div class="container" id="services" tabindex="0" aria-label="Main service categories">
-        <h2>Our Main Service Categories</h2>
+        <!-- <h2>Our Main Service Categories</h2> -->
+        <h2> </h2>
         <div class="services-grid" id="service-cards" role="list"></div>
     </div>
 
@@ -492,12 +506,7 @@ footer {
                         { url: './House Extensions/20250627_210825.jpg', label: 'Before' },
                         { url: './House Extensions/20250701_232008.jpg', label: 'After' }
                     ]},
-                    { name: 'Home Conversions', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ]},
+                    { name: 'Home Conversions', images: []},
                     { name: 'Room Conversions', images: [
                         { url: './Room Conversions/IMAGE 2025-08-14 23:15:15.jpg', label: 'Before' },
                         { url: './Room Conversions/IMAGE 2025-08-14 23:06:52.jpg', label: 'During' },
@@ -567,30 +576,22 @@ footer {
                 subservices: [
                     { name: 'General Plumbing', images: [
                         { url: './General Plumbing/IMG_8042.jpg', label: 'Before' },
+                        { url: './General Plumbing/IMAGE 2025-08-14 23:22:50.jpg', label: 'During' },
+                        { url: './General Plumbing/IMAGE 2025-08-14 23:24:26.jpg', label: 'During' },
                         { url: './General Plumbing/IMG_8043.jpg', label: 'After' }
                     ]},
                     { name: 'Bathroom Fitters', images: [
                         { url: './Bathroom Fitters/IMAGE 2025-08-14 23:14:33.jpg', label: 'Before' },
                         { url: './Bathroom Fitters/IMAGE 2025-08-14 23:14:32.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Bathroom Fitters', images: [
                         { url: './Bathroom Fitters/20250731_132800.jpg', label: 'Before' },
                         { url: './Bathroom Fitters/20250731_134731.jpg', label: 'During' },
                         { url: './Bathroom Fitters/20250731_135654.jpg', label: 'During' },
                         { url: './Bathroom Fitters/20250731_165754.jpg', label: 'After' }
-                    ] },
-                    { name: 'Emergency Plumbing', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Water Tank Installations', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] }
+                    ]},
+                    { name: 'Emergency Plumbing', images: []},
+                    { name: 'Water Tank Installations', images: []}
                 ],
                 images: [
                     { url: 'https://images.unsplash.com/photo-1580582932221-169bb0a32a43?auto=format&fit=crop&w=800&q=80', label: 'Before' },
@@ -608,25 +609,19 @@ footer {
                         { url: './Boiler Installations/IMG_9970.JPG', label: 'During' },
                         { url: './Boiler Installations/IMG_9971.JPG', label: 'During' },
                         { url: './Boiler Installations/IMG_9972.JPG', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Radiator Repairs', images: [
-                        { url: './Radiator Repairs/IMG_7879.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
+                        { url: './Radiator Repairs/IMG_7879.jpg', label: 'Before' }
+                    ]},
                     { name: 'Radiator Installation', images: [
                         { url: './Radiator Installation/IMAGE 2025-08-14 23:23:06.jpg', label: 'Before' },
                         { url: './Radiator Installation/IMAGE 2025-08-14 23:23:08.jpg', label: 'During' },
                         { url: './Radiator Installation/IMAGE 2025-08-14 23:23:12.jpg', label: 'During' },
                         { url: './Radiator Installation/IMAGE 2025-08-14 23:23:21.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Central Heating Systems', images: [
-                        { url: './Central Heating Systems/IMG_8713.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] }
+                        { url: './Central Heating Systems/IMG_8713.jpg', label: 'Before' }
+                    ]}
                 ],
                 images: [
                     { url: 'https://images.unsplash.com/photo-1576042081505-89c0f9b0bbd2?auto=format&fit=crop&w=800&q=80', label: 'Before' },
@@ -639,24 +634,9 @@ footer {
                 icon: 'fa-key',
                 description: 'Emergency Locksmith, Lock Fitting, Security Systems installation and repairs.',
                 subservices: [
-                    { name: 'Emergency Locksmith', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Lock Fitting', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Security Systems Installation', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] }
+                    { name: 'Emergency Locksmith', images: []},
+                    { name: 'Lock Fitting', images: []},
+                    { name: 'Security Systems Installation', images: []}
                 ],
                 images: [
                     { url: 'https://images.unsplash.com/photo-1581451966296-fb9d4772d5f1?auto=format&fit=crop&w=800&q=80', label: 'Before' },
@@ -669,30 +649,12 @@ footer {
                 icon: 'fa-bolt',
                 description: 'Rewiring, Fuse Box Installations, Lighting Installations, Electrical Safety Certificates.',
                 subservices: [
-                    { name: 'Rewiring', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Fuse Box Installations', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
+                    { name: 'Rewiring', images: []},
+                    { name: 'Fuse Box Installations', images: []},
                     { name: 'Lighting Installations', images: [
-                        { url: './Lighting Installations/20241203_183409.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Electrical Safety Certificates', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] }
+                        { url: './Lighting Installations/20241203_183409.jpg', label: 'Before' }
+                    ]},
+                    { name: 'Electrical Safety Certificates', images: []}
                 ],
                 images: [
                     { url: 'https://images.unsplash.com/photo-1543791184-9c2f78733ec1?auto=format&fit=crop&w=800&q=80', label: 'Before' },
@@ -708,39 +670,21 @@ footer {
                     { name: 'Door Fitting', images: [
                         { url: './Door Fitting/IMAGE 2025-08-14 22:53:37.jpg', label: 'Before' },
                         { url: './Door Fitting/IMAGE 2025-08-14 22:53:40.jpg', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './Door Fitting/IMAGE 2025-08-14 22:53:12.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Assembly', images: [
                         { url: './Assembly/IMAGE 2025-08-14 23:08:13.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './Assembly/IMAGE 2025-08-14 23:08:15.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Assembly', images: [
                         { url: './Assembly/IMAGE 2025-08-14 23:11:03.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './Assembly/IMAGE 2025-08-14 23:11:10.jpg', label: 'After' }
-                    ] },
-                    { name: 'Custom Shelving', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Staircase Installations', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
+                    ]},
+                    { name: 'Custom Shelving', images: []},
                     { name: 'Staircase Installations', images: [
                         { url: './Staircase Installations/IMAGE 2025-08-14 23:13:57.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './Staircase Installations/IMAGE 2025-08-14 23:13:56.jpg', label: 'After' }
-                    ] }
+                    ]}
                 ],
                 images: [
                     { url: 'https://images.unsplash.com/photo-1527030280862-64139fba04ca?auto=format&fit=crop&w=800&q=80', label: 'Before' },
@@ -753,30 +697,10 @@ footer {
                 icon: 'fa-umbrella',
                 description: 'Roof Repairs, Flat Roofs, Gutter Cleaning, Chimney Repairs and more.',
                 subservices: [
-                    { name: 'Roof Repairs', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Flat Roof Installation', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Gutter Cleaning', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Chimney Repairs', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] }
+                    { name: 'Roof Repairs', images: []},
+                    { name: 'Flat Roof Installation', images: []},
+                    { name: 'Gutter Cleaning', images: []},
+                    { name: 'Chimney Repairs', images: []}
                 ],
                 images: [
                     { url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80', label: 'Before' },
@@ -796,44 +720,36 @@ footer {
                         { url: './Interior Painting/IMAGE 2025-08-14 23:14:45.jpg', label: 'During' },
                         { url: './Interior Painting/IMAGE 2025-08-14 23:11:21.jpg', label: 'During' },
                         { url: './Interior Painting/IMAGE 2025-08-14 23:11:23.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Interior Repainting', images: [
                         { url: './Interior Painting/IMAGE 2025-08-14 23:14:17.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './Interior Painting/IMAGE 2025-08-14 23:14:16.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Wallpapering', images: [
                         { url: './Wallpapering/IMAGE 2025-08-14 22:56:39.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './Wallpapering/IMAGE 2025-08-14 22:56:43.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Plastering', images: [
                         { url: './Plastering/IMAGE 2025-08-14 23:10:33.jpg', label: 'Before' },
                         { url: './Plastering/IMAGE 2025-08-14 23:10:35.jpg', label: 'During' },
                         { url: './Plastering/IMAGE 2025-08-14 23:10:40.jpg', label: 'During' },
                         { url: './Plastering/IMAGE 2025-08-14 23:10:34.jpg', label: 'During' },
                         { url: './Plastering/IMAGE 2025-08-14 23:10:38.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Mounting', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
+                        { url: './Mounting/PHOTO-2025-08-15-02-15-53 2.jpg', label: 'Before' },
+                        { url: './Mounting/PHOTO-2025-08-15-02-15-53.jpg', label: 'During' },
                         { url: './Mounting/20250305_133311.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Mounting', images: [
                         { url: './Mounting/IMAGE 2025-08-14 23:14:58.jpg', label: 'Before' },
                         { url: './Mounting/IMAGE 2025-08-14 23:14:57.jpg', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './Mounting/IMAGE 2025-08-14 23:14:59.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'windows', images: [
                         { url: './windows/IMAGE 2025-08-14 23:00:35.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './windows/IMAGE 2025-08-14 23:00:33.jpg', label: 'After' }
-                    ] }
+                    ]}
                 ],
                 images: [
                     { url: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=80', label: 'Before' },
@@ -849,27 +765,17 @@ footer {
                     { name: 'Wall & Floor Tiling', images: [
                         { url: './Wall & Floor Tiling/IMAGE 2025-08-14 23:00:58.jpg', label: 'Before' },
                         { url: './Wall & Floor Tiling/IMAGE 2025-08-14 23:01:06.jpg', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './Wall & Floor Tiling/IMAGE 2025-08-14 23:01:09.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Wall & Floor Tiling', images: [
                         { url: './Wall & Floor Tiling/IMAGE 2025-08-14 23:05:49.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './Wall & Floor Tiling/IMAGE 2025-08-14 23:05:52.jpg', label: 'After' }
-                    ] },
+                    ]},
                     { name: 'Bathroom Tiling', images: [
                         { url: './Bathroom Tiling/IMAGE 2025-08-14 23:05:08.jpg', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
                         { url: './Bathroom Tiling/IMAGE 2025-08-14 23:05:10.jpg', label: 'After' }
-                    ] },
-                    { name: 'Wooden Flooring', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
+                    ]},
+                    { name: 'Wooden Flooring', images: []},
                     { name: 'Laminate Flooring', images: [
                         { url: './Laminate Flooring/IMAGE 2025-08-14 22:58:41.jpg', label: 'Before' },
                         { url: './Laminate Flooring/IMAGE 2025-08-14 22:58:37.jpg', label: 'During' },
@@ -877,7 +783,7 @@ footer {
                         { url: './Laminate Flooring/IMAGE 2025-08-14 23:25:12.jpg', label: 'During' },
                         { url: './Laminate Flooring/IMAGE 2025-08-14 23:25:17.jpg', label: 'During' },
                         { url: './Laminate Flooring/IMAGE 2025-08-14 23:25:13.jpg', label: 'After' }
-                    ] }
+                    ]}
                 ],
                 images: [
                     { url: 'https://images.unsplash.com/photo-1556912996-4ad1c67d6c79?auto=format&fit=crop&w=800&q=80', label: 'Before' },
@@ -895,25 +801,10 @@ footer {
                         { url: './Garden Decking/IMG_8982.jpg', label: 'During' },
                         { url: './Garden Decking/IMG_8986.jpg', label: 'During' },
                         { url: './Garden Decking/IMG_8992.jpg', label: 'After' }
-                    ] },
-                    { name: 'Fencing', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Patio Installation', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] },
-                    { name: 'Driveways', images: [
-                        // { url: '.', label: 'Before' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'During' },
-                        // { url: '.', label: 'After' }
-                    ] }
+                    ]},
+                    { name: 'Fencing', images: []},
+                    { name: 'Patio Installation', images: []},
+                    { name: 'Driveways', images: []}
                 ],
                 images: [
                     { url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80', label: 'Before' },
@@ -938,12 +829,12 @@ footer {
             `;
             card.addEventListener('click', () => {
                 showServiceDetails(service.id);
-                scrollToDetails();
+                scrollToSubservices();
             });
             card.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     showServiceDetails(service.id);
-                    scrollToDetails();
+                    scrollToSubservices();
                     e.preventDefault();
                 }
             });
@@ -961,7 +852,7 @@ footer {
                     <button class="back-btn" onclick="hideServiceDetails()" aria-label="Back to services">Back to Services</button>
                     <h2>${service.title}</h2>
                     <p class="service-desc">${service.description}</p>
-                    <div class="subservices-list">
+                    <div class="subservices-list" id="subservices-list-${service.id}">
                         ${service.subservices.map((sub, i) => `
                             <div class="subservice-item" tabindex="0" role="button" aria-pressed="false" data-index="${i}" data-service="${service.id}">${sub.name}</div>
                         `).join('')}
@@ -1029,79 +920,82 @@ footer {
             document.querySelectorAll('.subservice-item').forEach(item => {
                 item.addEventListener('click', (e) => {
                     handleSubserviceClick(e.target.dataset.service, e.target.dataset.index);
+                    scrollToSlider(e.target.dataset.service);
                 });
                 item.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         handleSubserviceClick(e.target.dataset.service, e.target.dataset.index);
+                        scrollToSlider(e.target.dataset.service);
                         e.preventDefault();
                     }
                 });
             });
+        }
 
-            function handleSubserviceClick(serviceId, index) {
-                const subservice = servicesData.find(s => s.id === serviceId).subservices[index];
-                const message = document.getElementById(`subservice-message-${serviceId}`);
-                const mainSliderContainer = document.getElementById(`main-slider-${serviceId}`);
+        // Handle subservice click
+        function handleSubserviceClick(serviceId, index) {
+            const subservice = servicesData.find(s => s.id === serviceId).subservices[index];
+            const message = document.getElementById(`subservice-message-${serviceId}`);
+            const mainSliderContainer = document.getElementById(`main-slider-${serviceId}`);
 
-                if (subservice.images && subservice.images.length > 0) {
-                    message.style.display = 'none';
-                    mainSliderContainer.innerHTML = `
+            if (subservice.images && subservice.images.length > 0) {
+                message.style.display = 'none';
+                mainSliderContainer.innerHTML = `
+                    <div class="swiper-wrapper">
+                        ${subservice.images.map(img => `
+                            <div class="swiper-slide">
+                                <img src="${img.url}" alt="${img.label} ${subservice.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                                <div class="image-fallback">Image not available</div>
+                                <div class="image-label">${img.label}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-thumbs" id="thumbs-slider-${serviceId}-${index}">
                         <div class="swiper-wrapper">
                             ${subservice.images.map(img => `
                                 <div class="swiper-slide">
-                                    <img src="${img.url}" alt="${img.label} ${subservice.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-                                    <div class="image-fallback">Image not available</div>
-                                    <div class="image-label">${img.label}</div>
+                                    <img src="${img.url}" alt="Thumbnail for ${img.label} ${subservice.name}">
                                 </div>
                             `).join('')}
                         </div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-pagination"></div>
-                        <div class="swiper-thumbs" id="thumbs-slider-${serviceId}-${index}">
-                            <div class="swiper-wrapper">
-                                ${subservice.images.map(img => `
-                                    <div class="swiper-slide">
-                                        <img src="${img.url}" alt="Thumbnail for ${img.label} ${subservice.name}">
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
+                    </div>
+                `;
 
-                    const subSwiper = new Swiper(`#main-slider-${serviceId}`, {
-                        loop: subservice.images.length > 1,
-                        slidesPerView: 1,
-                        spaceBetween: 10,
-                        navigation: {
-                            nextEl: `.swiper-button-next`,
-                            prevEl: `.swiper-button-prev`,
-                        },
-                        pagination: {
-                            el: `.swiper-pagination`,
-                            clickable: true,
-                        },
-                        thumbs: {
-                            swiper: new Swiper(`#thumbs-slider-${serviceId}-${index}`, {
-                                loop: subservice.images.length > 1,
-                                slidesPerView: 3,
-                                spaceBetween: 10,
-                                watchSlidesProgress: true,
-                                slideToClickedSlide: true,
-                            })
-                        },
-                        effect: 'fade',
-                        fadeEffect: { crossFade: true },
-                        autoplay: {
-                            delay: 5000,
-                            disableOnInteraction: false,
-                        },
-                    });
-                } else {
-                    message.style.display = 'block';
-                    mainSliderContainer.innerHTML = '';
-                    setTimeout(() => { message.style.display = 'none'; }, 3000);
-                }
+                const subSwiper = new Swiper(`#main-slider-${serviceId}`, {
+                    loop: subservice.images.length > 1,
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                    navigation: {
+                        nextEl: `.swiper-button-next`,
+                        prevEl: `.swiper-button-prev`,
+                    },
+                    pagination: {
+                        el: `.swiper-pagination`,
+                        clickable: true,
+                    },
+                    thumbs: {
+                        swiper: new Swiper(`#thumbs-slider-${serviceId}-${index}`, {
+                            loop: subservice.images.length > 1,
+                            slidesPerView: 3,
+                            spaceBetween: 10,
+                            watchSlidesProgress: true,
+                            slideToClickedSlide: true,
+                        })
+                    },
+                    effect: 'fade',
+                    fadeEffect: { crossFade: true },
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                });
+            } else {
+                message.style.display = 'block';
+                mainSliderContainer.innerHTML = '';
+                setTimeout(() => { message.style.display = 'none'; }, 3000);
             }
         }
 
@@ -1111,9 +1005,22 @@ footer {
             serviceCardsContainer.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Scroll to details section
-        function scrollToDetails() {
-            detailsSection.scrollIntoView({ behavior: 'smooth' });
+        // Scroll to subservices list
+        function scrollToSubservices() {
+            const subservicesList = document.querySelector('.subservices-list');
+            if (subservicesList) {
+                subservicesList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                detailsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Scroll to slider
+        function scrollToSlider(serviceId) {
+            const slider = document.getElementById(`main-slider-${serviceId}`);
+            if (slider) {
+                slider.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         // Show first service details on load
