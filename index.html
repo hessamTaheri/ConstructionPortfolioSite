@@ -10,472 +10,553 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <style>
-        /* Reset and basics */
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            font-family: 'Merriweather', serif;
-            background: #FAFAFA;
-            color: #222222;
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        a {
-            text-decoration: none;
-            color: #17A2B8;
-            transition: color 0.3s ease;
-        }
-        a:hover, a:focus { color: #0B1D3F; }
-        html { scroll-behavior: smooth; }
+<style>
+    /* Reset and basics */
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: 'Merriweather', serif;
+        background: #FAFAFA;
+        color: #222222;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    a {
+        text-decoration: none;
+        color: #17A2B8;
+        transition: color 0.3s ease;
+    }
+    a:hover, a:focus { color: #0B1D3F; }
+    html { scroll-behavior: smooth; }
 
-        /* Header */
-        header {
-            background: #0B1D3F;
-            color: white;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 10000;
-            box-shadow: 0 2px 8px rgba(11, 29, 63, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: 1.5px;
-            user-select: none;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        nav {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-        nav a {
-            font-weight: 600;
-            font-size: 1.05rem;
-            color: #17A2B8;
-        }
-        nav a:hover, nav a:focus { color: #FAFAFA; }
-        .btn-cta {
-            background-color: #17A2B8;
-            border: none;
-            color: white;
-            font-weight: 700;
-            padding: 0.6rem 1.5rem;
-            border-radius: 30px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            margin-left: 2rem;
-            box-shadow: 0 4px 12px rgba(23, 162, 184, 0.4);
-            user-select: none;
-        }
-        .btn-cta:hover, .btn-cta:focus {
-            background-color: #0B1D3F;
-            box-shadow: 0 6px 20px rgba(11, 29, 63, 0.8);
-            outline: none;
-        }
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-        .hamburger span {
-            height: 3px;
-            width: 25px;
-            background: white;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        /* Mobile nav */
-@media (max-width: 768px) {
+    /* Header */
     header {
-        padding: 0.56rem 1.4rem; /* تغییر از 1rem 2rem به 70% از مقدار فعلی (0.7 * 0.8rem ≈ 0.56rem و 0.7 * 2rem ≈ 1.4rem) */
+        background: #0B1D3F;
+        color: white;
+        padding: 1rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 10000;
+        box-shadow: 0 2px 8px rgba(11, 29, 63, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center; /* لوگو در وسط */
+    }
+    .logo {
+        font-weight: 700;
+        font-size: 1.5rem;
+        letter-spacing: 1.5px;
+        user-select: none;
+        white-space: nowrap;
+        text-align: center;
+        flex-grow: 1;
     }
     nav {
-        position: fixed;
-        top: 49px; /* تغییر از 70px به 70% از مقدار فعلی (0.7 * 70 ≈ 49px) */
-        right: 0;
-        background: #0B1D3F;
-        height: calc(100% - 49px); /* تغییر از calc(100% - 70px) به 70% از مقدار قبلی */
-        width: 175px; /* تغییر از 250px به 70% از مقدار فعلی (0.7 * 250 ≈ 175px) */
-        flex-direction: column;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        padding-top: 1rem; /* تغییر از 2rem به 70% از مقدار فعلی (0.7 * 2 ≈ 1.4rem) */
-        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        position: absolute;
+        right: 2rem;
     }
-    nav.active { transform: translateX(0); }
-    nav a { margin: 1.05rem; font-size: 0.77rem; /* تغییر از 1.5rem و 1.1rem به 70% از مقدار فعلی */ }
-    .hamburger { display: flex; }
-    .btn-cta { margin: 1.05rem; font-size: 0.63rem; padding: 0.35rem 0.84rem; /* تغییر از 1.5rem, 0.9rem, 0.5rem 1.2rem به 70% */ }
-}
+    nav a {
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: #17A2B8;
+    }
+    nav a:hover, nav a:focus { color: #FAFAFA; }
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+        position: absolute;
+        left: 1rem;
+    }
+    .hamburger span {
+        height: 3px;
+        width: 25px;
+        background: white;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(11, 29, 63, 0.407), rgba(11, 29, 63, 0.775)), url('./design/29.png') no-repeat center/cover;
-            height: 70vh;
+    /* Floating CTA Button */
+    .btn-cta {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background-color: #17A2B8;
+        border: none;
+        color: white;
+        font-weight: 700;
+        padding: 1rem 1.5rem;
+        border-radius: 50px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 4px 12px rgba(23, 162, 184, 0.4);
+        user-select: none;
+        text-align: center;
+        z-index: 1000;
+    }
+    .btn-cta:hover, .btn-cta:focus {
+        background-color: #0B1D3F;
+        box-shadow: 0 6px 20px rgba(11, 29, 63, 0.8);
+        transform: scale(1.05);
+        outline: none;
+    }
+
+    /* Mobile nav */
+    @media (max-width: 768px) {
+        header {
+            padding: 0.5rem 0.8rem;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            color: white;
-            text-align: center;
-            padding: 0 2rem;
-            user-select: none;
+            justify-content: center;
+            flex-wrap: nowrap;
+            overflow: hidden;
         }
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            padding: 1px;
-            margin: auto;
-            font-size: 1rem;
-            font-weight: 400;
-            max-width: 1000px;
-            letter-spacing: 0.3px;
-        }
-        .hero .btn-cta {
-            margin-top: 2rem;
-            font-size: 1.15rem;
-            padding: 0.8rem 2.2rem;
-            box-shadow: 0 6px 25px rgba(23, 162, 184, 0.5);
-        }
-        .hero .btn-cta:hover, .hero .btn-cta:focus {
-            box-shadow: 0 8px 30px rgba(11, 29, 63, 0.9);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1280px;
-            margin: 4rem auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Section Titles */
-        h2 {
-            color: #0B1D3F;
-            font-weight: 700;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            user-select: none;
-        }
-
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        .service-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease;
-        }
-        .service-card:hover, .service-card:focus {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-            outline: none;
-        }
-        .service-icon {
-            font-size: 3rem;
-            color: #17A2B8;
-            margin-bottom: 1rem;
-        }
-        .service-title {
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: #0B1D3F;
-        }
-
-        /* Service Detail Section */
-        .service-detail {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-            margin-bottom: 3rem;
-        }
-        .service-desc {
-            font-weight: 400;
-            color: #444;
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-        .subservices-list {
+        .hamburger {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
+            margin: 0 0.4rem;
         }
-        .subservice-item {
-            flex: 1 1 150px;
-            background: #E1F0F6;
-            border-radius: 10px;
-            padding: 1rem;
-            font-weight: 600;
-            color: #0B1D3F;
-            box-shadow: 0 3px 8px rgba(23,162,184,0.3);
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            font-size: 0.95rem;
+        .logo {
+            font-size: 1rem;
+            margin: 0;
+            max-width: 260px;
+            white-space: nowrap;
         }
-        .subservice-item:hover, .subservice-item:focus {
-            background-color: #17A2B8;
-            color: white;
-            outline: none;
+        nav {
+            position: fixed;
+            top: 44px;
+            left: 0;
+            background: #0B1D3F;
+            height: calc(100% - 44px);
+            width: 175px;
+            flex-direction: column;
+            transform: translateX(-175px);
+            transition: transform 0.3s ease;
+            padding-top: 1rem;
+            z-index: 10000;
+            right: auto;
         }
-        .subservice-message {
-            display: none;
-            margin-top: 1rem;
-            padding: 0.8rem;
-            background: #E1F0F6;
-            border-radius: 10px;
-            text-align: center;
-            color: #0B1D3F;
+        nav.active {
+            transform: translateX(0);
+        }
+        nav a {
+            margin: 1.05rem;
+            font-size: 0.77rem;
+        }
+        .btn-cta {
+            bottom: 1.5rem;
+            right: 1.5rem;
+            padding: 0.8rem 1.2rem;
             font-size: 0.9rem;
         }
-        .back-btn {
-            background: #17A2B8;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-            font-size: 0.95rem;
-        }
-        .back-btn:hover, .back-btn:focus {
-            background: #0B1D3F;
-            outline: none;
-        }
+    }
 
-        /* Swiper Slider Styles */
-        .swiper-container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            position: relative;
-            height: auto;
+    /* تنظیمات خاص برای آیفون 16 پرو مکس (~430px) */
+    @media (max-width: 430px) {
+        header {
+            padding: 0.4rem 0.6rem;
         }
-        .swiper-slide {
-            background: #f5f5f5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
+        .hamburger {
+            margin: 0 0.3rem;
+            width: 22px;
         }
-        .swiper-slide img {
-            width: 100%;
-            max-height: 500px;
-            object-fit: contain;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            display: block;
-            margin: 0 auto;
+        .hamburger span {
+            width: 22px;
         }
-        .swiper-thumbs {
-            margin-top: 0.8rem;
+        .logo {
+            font-size: 0.9rem;
+            max-width: 240px;
         }
-        .swiper-thumbs .swiper-slide {
-            opacity: 0.4;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
+        .btn-cta {
+            bottom: 1rem;
+            right: 1rem;
+            padding: 0.6rem 1rem;
+            font-size: 0.8rem;
         }
-        .swiper-thumbs .swiper-slide img {
-            width: 100%;
-            max-height: 120px;
-            object-fit: contain;
-            border-radius: 8px;
-            display: block;
-            margin: 0 auto;
-        }
-        .swiper-thumbs .swiper-slide-thumb-active {
-            opacity: 1;
-            border: 2px solid #17A2B8;
-        }
-        .swiper-button-next, .swiper-button-prev {
-            color: #17A2B8;
-            background: rgba(255,255,255,0.8);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            transition: background-color 0.3s ease;
-        }
-        .swiper-button-next:hover, .swiper-button-prev:hover {
-            background: #0B1D3F;
-            color: white;
-        }
-        .swiper-pagination {
-            bottom: 10px;
-        }
-        .swiper-pagination-bullet {
-            background: #17A2B8;
-            opacity: 0.6;
-        }
-        .swiper-pagination-bullet-active {
-            background: #0b1d3f;
-            opacity: 1;
-        }
-        .image-fallback {
-            display: none;
-            text-align: center;
-            color: #444;
-            font-size: 1rem;
-            margin-top: 1rem;
-        }
-        .image-label {
-            text-align: center;
-            font-weight: 600;
-            color: #0B1D3F;
-            margin-top: 0.5rem;
-            font-size: 1rem;
-        }
+    }
 
-        /* Contact Section */
-        #contact {
-            text-align: center;
-            font-size: 1.1rem;
-            color: #444;
-            margin-bottom: 4rem;
-        }
-        #contact p {
-            margin: 0.5rem 0;
-        }
-        #contact a { font-weight: 600; }
+    /* Hero Section */
+    .hero {
+        background: linear-gradient(rgba(11, 29, 63, 0.407), rgba(11, 29, 63, 0.775)), url('./design/29.png') no-repeat center/cover;
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 0 2rem;
+        user-select: none;
+    }
+    .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    .hero p {
+        padding: 1px;
+        margin: auto;
+        font-size: 1rem;
+        font-weight: 400;
+        max-width: 1000px;
+        letter-spacing: 0.3px;
+    }
+    .hero .btn-cta {
+        margin-top: 2rem;
+        font-size: 1.15rem;
+        padding: 0.8rem 2.2rem;
+        box-shadow: 0 6px 25px rgba(23, 162, 184, 0.5);
+    }
+    .hero .btn-cta:hover, .hero .btn-cta:focus {
+        box-shadow: 0 8px 30px rgba(11, 29, 63, 0.9);
+    }
 
-        /* Footer */
-        footer {
-            background: #0B1D3F;
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-            font-weight: 600;
-            user-select: none;
-        }
+    /* Container */
+    .container {
+        max-width: 1280px;
+        margin: 4rem auto;
+        padding: 0 1.5rem;
+    }
 
-        /* Responsive Adjustments */
-        @media (max-width: 1024px) {
-            .hero { height: 65vh; }
-            .hero h1 { font-size: 3rem; }
-            .hero p { font-size: 1.1rem; }
-            .swiper-slide img { max-height: 450px; }
-            .swiper-thumbs .swiper-slide img { max-height: 100px; }
-            .service-card { padding: 1.2rem; }
-            .service-icon { font-size: 2.5rem; }
-            .service-title { font-size: 1.2rem; }
-            .subservice-item { padding: 0.8rem; font-size: 0.9rem; }
-        }
+    /* Section Titles */
+    h2 {
+        color: #0B1D3F;
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        user-select: none;
+    }
 
-        @media (max-width: 768px) {
-            .hero { height: 60vh; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1rem; }
-            .services-grid {
-        grid-template-columns: repeat(3, minmax(100px, 1fr)); /* تغییر به 3 ستون با حداقل عرض 100px برای موبایل */
+    /* Services Grid */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+    .service-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease;
+    }
+    .service-card:hover, .service-card:focus {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        outline: none;
+    }
+    .service-icon {
+        font-size: 3rem;
+        color: #17A2B8;
+        margin-bottom: 1rem;
+    }
+    .service-title {
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: #0B1D3F;
+    }
+
+    /* Service Detail Section */
+    .service-detail {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        margin-bottom: 3rem;
+    }
+    .service-desc {
+        font-weight: 400;
+        color: #444;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+    .subservices-list {
+        display: flex;
+        flex-wrap: wrap;
         gap: 1rem;
     }
-            .service-card { padding: 1rem; }
-            .service-icon { font-size: 2rem; }
-            .service-title { font-size: 1.1rem; }
-            .service-detail { padding: 1.5rem; }
-            .subservices-list { gap: 0.8rem; }
-            .subservice-item { flex: 1 1 120px; padding: 0.6rem; font-size: 0.85rem; }
-            .swiper-slide img { max-height: 400px; }
-            .swiper-thumbs .swiper-slide img { max-height: 80px; }
-            .swiper-thumbs .swiper-slide { width: 80px !important; }
-            h2 { font-size: 2rem; }
-            .back-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
-        }
+    .subservice-item {
+        flex: 1 1 150px;
+        background: #E1F0F6;
+        border-radius: 10px;
+        padding: 1rem;
+        font-weight: 600;
+        color: #0B1D3F;
+        box-shadow: 0 3px 8px rgba(23,162,184,0.3);
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        font-size: 0.95rem;
+    }
+    .subservice-item:hover, .subservice-item:focus {
+        background-color: #17A2B8;
+        color: white;
+        outline: none;
+    }
+    .subservice-message {
+        display: none;
+        margin-top: 1rem;
+        padding: 0.8rem;
+        background: #E1F0F6;
+        border-radius: 10px;
+        text-align: center;
+        color: #0B1D3F;
+        font-size: 0.9rem;
+    }
+    .back-btn {
+        background: #17A2B8;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border-radius: 25px;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+        font-size: 0.95rem;
+    }
+    .back-btn:hover, .back-btn:focus {
+        background: #0B1D3F;
+        outline: none;
+    }
 
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 2rem; }
-            .hero p { font-size: 0.9rem; }
-            .container { margin: 2rem auto; padding: 0 1rem; }
-            h2 { font-size: 1.8rem; }
-            .service-card { padding: 0.8rem; }
-            .service-icon { font-size: 1.8rem; }
-            .service-title { font-size: 1rem; }
-            .subservice-item { flex: 1 1 100px; padding: 0.5rem; font-size: 0.8rem; }
-            .swiper-slide img { max-height: 350px; }
-            .swiper-thumbs .swiper-slide img { max-height: 60px; }
-            .swiper-thumbs .swiper-slide { width: 60px !important; }
-            .back-btn { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
-            .service-desc { font-size: 0.9rem; }
-            .subservice-message { font-size: 0.85rem; }
-            .image-label { font-size: 0.9rem; }
+    /* Swiper Slider Styles */
+    .swiper-container {
+        max-width: 1000px;
+        margin: 2rem auto;
+        position: relative;
+        height: auto;
+        padding: 0 1rem;
+    }
+    .swiper-slide {
+        background: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+    }
+    .swiper-slide img {
+        width: 100%;
+        max-height: 500px;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        display: block;
+        margin: 0 auto;
+    }
+    .swiper-thumbs {
+        margin-top: 1rem;
+        padding: 0 1rem;
+    }
+    .swiper-thumbs .swiper-slide {
+        opacity: 0.6;
+        cursor: pointer;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        border-radius: 8px;
+    }
+    .swiper-thumbs .swiper-slide:hover {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+    .swiper-thumbs .swiper-slide img {
+        width: 100%;
+        max-height: 100px;
+        object-fit: contain;
+        border-radius: 8px;
+        display: block;
+        margin: 0 auto;
+    }
+    .swiper-thumbs .swiper-slide-thumb-active {
+        opacity: 1;
+        border: 2px solid #17A2B8;
+        transform: scale(1.1);
+    }
+    .swiper-button-next, .swiper-button-prev {
+        color: #17A2B8;
+        background: rgba(255,255,255,0.9);
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .swiper-button-next:hover, .swiper-button-prev:hover {
+        background: #0B1D3F;
+        color: white;
+        transform: scale(1.1);
+    }
+    .swiper-pagination {
+        bottom: 15px;
+    }
+    .swiper-pagination-bullet {
+        background: #17A2B8;
+        opacity: 0.7;
+        width: 10px;
+        height: 10px;
+    }
+    .swiper-pagination-bullet-active {
+        background: #0b1d3f;
+        opacity: 1;
+    }
+    .image-fallback {
+        display: none;
+        text-align: center;
+        color: #444;
+        font-size: 1rem;
+        margin-top: 1rem;
+    }
+    .image-label {
+        text-align: center;
+        font-weight: 600;
+        color: #0B1D3F;
+        margin-top: 0.5rem;
+        font-size: 1rem;
+    }
+
+    /* Contact Section */
+    #contact {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #444;
+        margin-bottom: 4rem;
+    }
+    #contact p {
+        margin: 0.5rem 0;
+    }
+    #contact a { font-weight: 600; }
+
+    /* Footer */
+    footer {
+        background: #0B1D3F;
+        color: white;
+        text-align: center;
+        padding: 2rem 1rem;
+        font-weight: 600;
+        user-select: none;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .hero { height: 65vh; }
+        .hero h1 { font-size: 3rem; }
+        .hero p { font-size: 1.1rem; }
+        .swiper-slide img { max-height: 450px; }
+        .swiper-thumbs .swiper-slide img { max-height: 90px; }
+        .service-card { padding: 1.2rem; }
+        .service-icon { font-size: 2.5rem; }
+        .service-title { font-size: 1.2rem; }
+        .subservice-item { padding: 0.8rem; font-size: 0.9rem; }
+    }
+
+    @media (max-width: 768px) {
+        .hero { height: 60vh; }
+        .hero h1 { font-size: 2.5rem; }
+        .hero p { font-size: 1rem; }
+        .services-grid {
+            grid-template-columns: repeat(3, minmax(100px, 1fr));
+            gap: 1rem;
         }
-    </style>
+        .service-card { padding: 1rem; }
+        .service-icon { font-size: 2rem; }
+        .service-title { font-size: 1.1rem; }
+        .service-detail { padding: 1.5rem; }
+        .subservices-list { gap: 0.8rem; }
+        .subservice-item { flex: 1 1 120px; padding: 0.6rem; font-size: 0.85rem; }
+        .swiper-slide img { max-height: 400px; }
+        .swiper-thumbs .swiper-slide img { max-height: 80px; }
+        .swiper-thumbs .swiper-slide { width: 80px !important; }
+        h2 { font-size: 2rem; }
+        .back-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
+        .swiper-button-next, .swiper-button-prev {
+            width: 40px;
+            height: 40px;
+        }
+        .swiper-pagination-bullet {
+            width: 8px;
+            height: 8px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero h1 { font-size: 2rem; }
+        .hero p { font-size: 0.9rem; }
+        .container { margin: 2rem auto; padding: 0 1rem; }
+        h2 { font-size: 1.8rem; }
+        .service-card { padding: 0.8rem; }
+        .service-icon { font-size: 1.8rem; }
+        .service-title { font-size: 1rem; }
+        .subservice-item { flex: 1 1 100px; padding: 0.5rem; font-size: 0.8rem; }
+        .swiper-slide img { max-height: 350px; }
+        .swiper-thumbs .swiper-slide img { max-height: 60px; }
+        .swiper-thumbs .swiper-slide { width: 60px !important; }
+        .back-btn { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+        .service-desc { font-size: 0.9rem; }
+        .subservice-message { font-size: 0.85rem; }
+        .image-label { font-size: 0.9rem; }
+        .swiper-button-next, .swiper-button-prev {
+            width: 36px;
+            height: 36px;
+        }
+        .swiper-thumbs { margin-top: 0.8rem; }
+    }
+</style>
 </head>
 <body>
     <header role="banner">
+        <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+            <span></span><span></span><span></span>
+        </div>
         <div class="logo" aria-label="Our Construction Team logo">H&B bespoke builds and Repairs</div>
         <nav id="main-nav" aria-label="Main navigation">
             <a href="#services" aria-label="Our Services">Services</a>
             <a href="#details-section" aria-label="Service Details">Details</a>
             <a href="#contact" aria-label="Contact Us">Contact</a>
         </nav>
-        <a href="mailto:Hessam_Taheri@yahoo.com?subject=Quote%20Request%20-%20Our%20Construction%20Team&body=Dear%20Team,%0D%0A%0D%0AI%20am%20interested%20in%20requesting%20a%20quote%20for%20your%20services.%20Please%20provide%20details%20about%20your%20availability%20and%20pricing.%0D%0A%0D%0ABest%20regards,%0D%0A[Your%20Name]" class="btn-cta" aria-label="Request a Quote">Request a Quote</a>
-        <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
-            <span></span><span></span><span></span>
-        </div>
     </header>
-
+    <a href="mailto:Hessam_Taheri@yahoo.com?subject=Quote%20Request%20-%20Our%20Construction%20Team&body=Dear%20Team,%0D%0A%0D%0AI%20am%20interested%20in%20requesting%20a%20quote%20for%20your%20services.%20Please%20provide%20details%20about%20your%20availability%20and%20pricing.%0D%0A%0D%0ABest%20regards,%0D%0A[Your%20Name]" class="btn-cta" aria-label="Request a Quote">Request a Quote</a>
     <section class="hero" role="banner" aria-label="Main hero section with company tagline">
-        <h1>       <br/>       <br/>Building & Renovation Experts in London</h1>
+        <h1>Building & Renovation Experts in London</h1>
         <p>Your trusted partner for luxury construction, plumbing, electrical, decorating, and more.</p>
-        <p>Our team of seasoned professionals brings together expertise in architecture, civil engineering, and cutting-edge artificial intelligence to redefine construction excellence in London. With a passion for innovation, we specialize in delivering bespoke building and renovation solutions, seamlessly blending craftsmanship with technology. Our unique ability to showcase detailed design visualizations before project execution ensures your vision comes to life with precision and confidence. Committed to quality, sustainability, and client satisfaction, we transform spaces into inspiring environments that stand the test of time.<br/><br/><br/><br/><br/><br/></p>
-        <!-- <a href="mailto:Hessam_Taheri@yahoo.com?subject=Quote%20Request%20-%20Our%20Construction%20Team&body=Dear%20Team,%0D%0A%0D%0AI%20am%20interested%20in%20requesting%20a%20quote%20for%20your%20services.%20Please%20provide%20details%20about%20your%20availability%20and%20pricing.%0D%0A%0D%0ABest%20regards,%0D%0A[Your%20Name]" class="btn-cta" aria-label="Request a Quote">Request a Quote</a> -->
+        <p>Our team of seasoned professionals brings together expertise in architecture, civil engineering, and cutting-edge artificial intelligence to redefine construction excellence in London. With a passion for innovation, we specialize in delivering bespoke building and renovation solutions, seamlessly blending craftsmanship with technology. Our unique ability to showcase detailed design visualizations before project execution ensures your vision comes to life with precision and confidence. Committed to quality, sustainability, and client satisfaction, we transform spaces into inspiring environments that stand the test of time.</p>
     </section>
-
     <div class="container" id="services" tabindex="0" aria-label="Main service categories">
-        <!-- <h2>Our Main Service Categories</h2> -->
-        <h2> </h2>
+        <h2>Our Main Service Categories</h2>
         <div class="services-grid" id="service-cards" role="list"></div>
     </div>
-
     <div class="container" id="details-section" style="display:none;" tabindex="0" aria-live="polite" aria-atomic="true"></div>
-
     <div class="container" id="contact" tabindex="0" aria-label="Contact information">
-        <h2>Contact Us</h2>
+        <h2>Get in Touch</h2>
         <p>Email: <a href="mailto:Hessam_Taheri@yahoo.com">Hessam_Taheri@yahoo.com</a></p>
-        <p>Sam: <a href="tel:+447586920744">+44 7586 920 744</a></p>
-        <p>Buzz: <a href="tel:+447535663924">+44 7586 920 744</a></p>
-        <p>Serving Greater London and surrounding areas</p>
+        <p><strong>Need a free quote or want to book a visit?</strong></p>
+        <p>Please call <strong style="color:#17A2B8;">Sam </strong>directly at:</p>
+        <p><strong style="font-size:1.1em; color:#17A2B8;">📞 <a href="tel:+447586920744" style="color:#17A2B8;">+44 7586 920 744</a></strong></p>
+        <p>Or contact <span style="color:#17A2B8;">Buzz</span> at <a href="tel:+447535663924">+44 7535 663 924</a></p>
+        <p>We’re happy to help with any project across Greater London.</p>
     </div>
-
     <footer role="contentinfo">
         &copy; 2023 H&B bespoke builds and Repairs - All Rights Reserved
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
         const nav = document.getElementById('main-nav');
@@ -595,8 +676,7 @@
                     { name: 'Water Tank Installations', images: []}
                 ],
                 images: [
-                    { url: './Atmosclear-Domestic-Plumbing.jpg', label: 'Before' },
-                    // { url: 'https://images.unsplash.com/photo-1617244533706-6f8a11a9db54?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                    { url: './Atmosclear-Domestic-Plumbing.jpg', label: 'Before' }
                 ]
             },
             {
@@ -625,8 +705,7 @@
                     ]}
                 ],
                 images: [
-                    { url: './new-boiler-installation.jpg', label: 'Before' },
-                    // { url: 'https://images.unsplash.com/photo-1612715923092-89ce408c0429?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                    { url: './new-boiler-installation.jpg', label: 'Before' }
                 ]
             },
             {
@@ -640,8 +719,7 @@
                     { name: 'Security Systems Installation', images: []}
                 ],
                 images: [
-                    { url: './how-to-become-a-locksmith.jpg', label: 'Before' },
-                    // { url: 'https://images.unsplash.com/photo-1611252931954-0ec5e423be2f?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                    { url: './how-to-become-a-locksmith.jpg', label: 'Before' }
                 ]
             },
             {
@@ -658,8 +736,7 @@
                     { name: 'Electrical Safety Certificates', images: []}
                 ],
                 images: [
-                    { url: './electrical-installation-certificate.jpg', label: 'Before' },
-                    // { url: 'https://images.unsplash.com/photo-1518238892249-0b1ae3d23648?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                    { url: './electrical-installation-certificate.jpg', label: 'Before' }
                 ]
             },
             {
@@ -688,8 +765,7 @@
                     ]}
                 ],
                 images: [
-                    { url: './Carpentry_Desk_Hands_Shutterstocl.jpg', label: 'Before' },
-                    // { url: 'https://images.unsplash.com/photo-1524594157366-2af6b09d51f0?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                    { url: './Carpentry_Desk_Hands_Shutterstocl.jpg', label: 'Before' }
                 ]
             },
             {
@@ -704,8 +780,7 @@
                     { name: 'Chimney Repairs', images: []}
                 ],
                 images: [
-                    { url: './A-Guide-To-Buying-Drainage-Gutter-Header-Image.jpg', label: 'Before' },
-                    // { url: 'https://images.unsplash.com/photo-1519821172142-62d924ec2395?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                    { url: './A-Guide-To-Buying-Drainage-Gutter-Header-Image.jpg', label: 'Before' }
                 ]
             },
             {
@@ -753,8 +828,7 @@
                     ]}
                 ],
                 images: [
-                    { url: './painting-and-decorating4.jpg', label: 'Before' },
-                    // { url: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                    { url: './painting-and-decorating4.jpg', label: 'Before' }
                 ]
             },
             {
@@ -787,8 +861,7 @@
                     ]}
                 ],
                 images: [
-                    { url: './braemar_pattern_2_1.webp', label: 'Before' },
-                    // { url: 'https://images.unsplash.com/photo-1556912996-74b2fda9a9d2?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                    { url: './braemar_pattern_2_1.webp', label: 'Before' }
                 ]
             },
             {
@@ -808,8 +881,7 @@
                     { name: 'Driveways', images: []}
                 ],
                 images: [
-                    { url: './GettyImages-957245348.webp', label: 'Before' },
-                    // { url: 'https://images.unsplash.com/photo-1519821172142-62d924ec2395?auto=format&fit=crop&w=800&q=80', label: 'After' }
+                    { url: './GettyImages-957245348.webp', label: 'Before' }
                 ]
             }
         ];
@@ -891,7 +963,8 @@
             const mainSwiper = new Swiper(`#main-slider-${service.id}`, {
                 loop: service.images.length > 1,
                 slidesPerView: 1,
-                spaceBetween: 10,
+                spaceBetween: 20,
+                speed: 600,
                 navigation: {
                     nextEl: `.swiper-button-next`,
                     prevEl: `.swiper-button-prev`,
@@ -899,22 +972,33 @@
                 pagination: {
                     el: `.swiper-pagination`,
                     clickable: true,
+                    dynamicBullets: true,
                 },
                 thumbs: {
                     swiper: new Swiper(`#thumbs-slider-${service.id}`, {
                         loop: service.images.length > 1,
-                        slidesPerView: 3,
+                        slidesPerView: 4,
                         spaceBetween: 10,
                         watchSlidesProgress: true,
                         slideToClickedSlide: true,
+                        breakpoints: {
+                            480: { slidesPerView: 3 },
+                            768: { slidesPerView: 4 }
+                        }
                     })
                 },
-                effect: 'fade',
-                fadeEffect: { crossFade: true },
+                effect: 'slide',
                 autoplay: {
-                    delay: 5000,
+                    delay: 4000,
                     disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
                 },
+            });
+            mainSwiper.on('slideChange', () => {
+                mainSwiper.slides[mainSwiper.activeIndex].style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    mainSwiper.slides[mainSwiper.activeIndex].style.transform = 'scale(1)';
+                }, 300);
             });
 
             // Add event listeners for subservices
@@ -968,7 +1052,8 @@
                 const subSwiper = new Swiper(`#main-slider-${serviceId}`, {
                     loop: subservice.images.length > 1,
                     slidesPerView: 1,
-                    spaceBetween: 10,
+                    spaceBetween: 20,
+                    speed: 600,
                     navigation: {
                         nextEl: `.swiper-button-next`,
                         prevEl: `.swiper-button-prev`,
@@ -976,22 +1061,33 @@
                     pagination: {
                         el: `.swiper-pagination`,
                         clickable: true,
+                        dynamicBullets: true,
                     },
                     thumbs: {
                         swiper: new Swiper(`#thumbs-slider-${serviceId}-${index}`, {
                             loop: subservice.images.length > 1,
-                            slidesPerView: 3,
+                            slidesPerView: 4,
                             spaceBetween: 10,
                             watchSlidesProgress: true,
                             slideToClickedSlide: true,
+                            breakpoints: {
+                                480: { slidesPerView: 3 },
+                                768: { slidesPerView: 4 }
+                            }
                         })
                     },
-                    effect: 'fade',
-                    fadeEffect: { crossFade: true },
+                    effect: 'slide',
                     autoplay: {
-                        delay: 5000,
+                        delay: 4000,
                         disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
                     },
+                });
+                subSwiper.on('slideChange', () => {
+                    subSwiper.slides[subSwiper.activeIndex].style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        subSwiper.slides[subSwiper.activeIndex].style.transform = 'scale(1)';
+                    }, 300);
                 });
             } else {
                 message.style.display = 'block';
