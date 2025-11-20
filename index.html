@@ -682,6 +682,42 @@
     .slide-caption h3 { font-size: 1.4rem; }
     .slide-caption p { font-size: 1rem; }
 }
+/* ===== اصلاح نهایی اسلایدرهای سرویس‌ها - دیگه هیچ عکسی از گوشه بیرون نمی‌زنه ===== */
+.swiper-container {
+    overflow: hidden !important;
+    border-radius: 18px;
+    padding: 4px 0;               /* یه کم فاصله از بالا و پایین */
+}
+
+.swiper-container .swiper {
+    overflow: hidden !important;
+}
+
+.swiper-slide {
+    transform: scale(0.92);
+    opacity: 0.4;
+    transition: all 0.6s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.swiper-slide-active {
+    transform: scale(1);
+    opacity: 1;
+    z-index: 2;
+}
+
+.swiper-slide-next,
+.swiper-slide-prev {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+/* فقط اسلاید فعال و کمی از اطرافش معلوم باشه (مثل سایت‌های حرفه‌ای) */
+.swiper-slide-active ~ .swiper-slide,
+.swiper-slide-active + .swiper-slide {
+    opacity: 0 !important;
+}
 </style>
 </head>
 <body>
@@ -1187,6 +1223,49 @@
             }
         ];
 
+        // تنظیمات مشترک برای همه اسلایدرها (اینجا تعریف کن — یک بار کافیه)
+const commonConfig = {
+    loop: true,
+    centeredSlides: true,
+    slidesPerView: 1,
+    spaceBetween: 30,
+    speed: 800,
+    grabCursor: true,
+    watchOverflow: true,
+    effect: 'slide',
+    autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        dynamicBullets: true,
+    },
+    // این قسمت عکس‌های کناری رو کاملاً مخفی می‌کنه
+    on: {
+        progress: function () {
+            for (let i = 0; i < this.slides.length; i++) {
+                const slide = this.slides[i];
+                if (Math.abs(slide.progress) > 1) {
+                    slide.style.opacity = '0';
+                } else {
+                    slide.style.opacity = '1';
+                }
+            }
+        },
+        setTransition: function (transition) {
+            for (let i = 0; i < this.slides.length; i++) {
+                this.slides[i].style.transition = `${transition}ms`;
+            }
+        }
+    }
+};
         const serviceCardsContainer = document.getElementById('service-cards');
         const detailsSection = document.getElementById('details-section');
 
@@ -1261,40 +1340,20 @@
             `;
 
             // Initialize Swiper for main service slider
-            const mainSwiper = new Swiper(`#main-slider-${service.id}`, {
-                loop: service.images.length > 1,
-                slidesPerView: 1,
-                spaceBetween: 20,
-                speed: 600,
-                navigation: {
-                    nextEl: `.swiper-button-next`,
-                    prevEl: `.swiper-button-prev`,
-                },
-                pagination: {
-                    el: `.swiper-pagination`,
-                    clickable: true,
-                    dynamicBullets: true,
-                },
-                thumbs: {
-                    swiper: new Swiper(`#thumbs-slider-${service.id}`, {
-                        loop: service.images.length > 1,
-                        slidesPerView: 4,
-                        spaceBetween: 10,
-                        watchSlidesProgress: true,
-                        slideToClickedSlide: true,
-                        breakpoints: {
-                            480: { slidesPerView: 3 },
-                            768: { slidesPerView: 4 }
-                        }
-                    })
-                },
-                effect: 'slide',
-                autoplay: {
-                    delay: 4000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                },
-            });
+// اسلایدر اصلی سرویس (با تنظیمات حرفه‌ای)
+const mainSwiper = new Swiper(`#main-slider-${service.id}`, {
+    ...commonConfig,
+    thumbs: {
+        swiper: new Swiper(`#thumbs-slider-${service.id}`, {
+            loop: service.images.length > 1,
+            slidesPerView: 4,
+            spaceBetween: 10,
+            watchSlidesProgress: true,
+            slideToClickedSlide: true,
+            breakpoints: { 480: { slidesPerView: 3 } }
+        })
+    }
+});
             mainSwiper.on('slideChange', () => {
                 mainSwiper.slides[mainSwiper.activeIndex].style.transform = 'scale(1.02)';
                 setTimeout(() => {
@@ -1350,40 +1409,8 @@
                     </div>
                 `;
 
-                const subSwiper = new Swiper(`#main-slider-${serviceId}`, {
-                    loop: subservice.images.length > 1,
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                    speed: 600,
-                    navigation: {
-                        nextEl: `.swiper-button-next`,
-                        prevEl: `.swiper-button-prev`,
-                    },
-                    pagination: {
-                        el: `.swiper-pagination`,
-                        clickable: true,
-                        dynamicBullets: true,
-                    },
-                    thumbs: {
-                        swiper: new Swiper(`#thumbs-slider-${serviceId}-${index}`, {
-                            loop: subservice.images.length > 1,
-                            slidesPerView: 4,
-                            spaceBetween: 10,
-                            watchSlidesProgress: true,
-                            slideToClickedSlide: true,
-                            breakpoints: {
-                                480: { slidesPerView: 3 },
-                                768: { slidesPerView: 4 }
-                            }
-                        })
-                    },
-                    effect: 'slide',
-                    autoplay: {
-                        delay: 4000,
-                        disableOnInteraction: false,
-                        pauseOnMouseEnter: true,
-                    },
-                });
+// اسلایدر زیرسرویس (فقط با تنظیمات مشترک)
+new Swiper(`#main-slider-${serviceId}`, commonConfig);
                 subSwiper.on('slideChange', () => {
                     subSwiper.slides[subSwiper.activeIndex].style.transform = 'scale(1.02)';
                     setTimeout(() => {
