@@ -520,6 +520,168 @@
         }
         .swiper-thumbs { margin-top: 0.8rem; }
     }
+ /* اسلایدر پروژه‌ها - پشتیبانی کامل از عکس پرتره و لنداسکیپ */
+.projects-slider-section {
+    padding: 5rem 0;
+    background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+}
+
+.slider-title {
+    text-align: center;
+    font-size: 2.8rem;
+    color: #0B1D3F;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.projects-swiper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.projects-swiper .swiper-slide {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+    transition: all 0.4s ease;
+    height: 560px;                    /* ارتفاع ثابت برای همه اسلایدها */
+    background: #0f1a2e;              /* پس‌زمینه تیره برای عکس‌های کوچک */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.projects-swiper .swiper-slide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(11,29,63,0.4), rgba(0,0,0,0.6));
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.projects-swiper .swiper-slide:hover::before {
+    opacity: 1;
+}
+
+.projects-swiper .swiper-slide:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+
+.projects-swiper .swiper-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;              /* مهم: contain → عکس کامل دیده بشه */
+    transition: transform 0.8s ease;
+    position: relative;
+    z-index: 0;
+}
+
+.projects-swiper .swiper-slide:hover img {
+    transform: scale(1.05);
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(11, 29, 63, 0.95));
+    color: white;
+    padding: 2.5rem 1.8rem 1.8rem;
+    text-align: center;
+    z-index: 2;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.projects-swiper .swiper-slide:hover .slide-caption {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.slide-caption h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+.slide-caption p {
+    margin: 0;
+    font-size: 1.15rem;
+    opacity: 0.95;
+}
+
+/* دکمه‌های ناوبری */
+.projects-swiper .swiper-button-next,
+.projects-swiper .swiper-button-prev {
+    background: white;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.projects-swiper .swiper-button-next:hover,
+.projects-swiper .swiper-button-prev:hover {
+    background: #17A2B8;
+    transform: scale(1.12);
+}
+
+.projects-swiper .swiper-button-next::after,
+.projects-swiper .swiper-button-prev::after {
+    font-size: 22px;
+    color: #0B1D3F;
+    font-weight: bold;
+}
+
+.projects-swiper .swiper-button-next:hover::after,
+.projects-swiper .swiper-button-prev:hover::after {
+    color: white;
+}
+
+.projects-swiper .swiper-pagination-bullet {
+    background: #ddd;
+    width: 13px;
+    height: 13px;
+}
+
+.projects-swiper .swiper-pagination-bullet-active {
+    background: #17A2B8;
+    transform: scale(1.4);
+}
+
+/* ریسپانسیو */
+@media (max-width: 992px) {
+    .projects-swiper .swiper-slide { height: 500px; }
+    .slide-caption h3 { font-size: 1.55rem; }
+}
+
+@media (max-width: 768px) {
+    .projects-swiper .swiper-slide { height: 480px; }
+    .slider-title { font-size: 2.3rem; }
+    .slide-caption { 
+        padding: 2rem 1.2rem 1.5rem;
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-swiper .swiper-slide { height: 420px; }
+    .slide-caption h3 { font-size: 1.4rem; }
+    .slide-caption p { font-size: 1rem; }
+}
 </style>
 </head>
 <body>
@@ -540,6 +702,145 @@
         <p>Your trusted partner for luxury construction, plumbing, electrical, decorating, and more.</p>
         <p>Our team of seasoned professionals brings together expertise in architecture, civil engineering, and cutting-edge artificial intelligence to redefine construction excellence in London. With a passion for innovation, we specialize in delivering bespoke building and renovation solutions, seamlessly blending craftsmanship with technology. Our unique ability to showcase detailed design visualizations before project execution ensures your vision comes to life with precision and confidence. Committed to quality, sustainability, and client satisfaction, we transform spaces into inspiring environments that stand the test of time.</p>
     </section>
+    <!-- اسلایدر اصلی پروژه‌ها - قبل از دسته‌بندی خدمات -->
+<!-- اسلایدر اصلی پروژه‌ها - قبل از دسته‌بندی خدمات -->
+<section class="projects-slider-section" aria-label="Featured Projects Slider">
+    <div class="container">
+        <h2 class="slider-title">Our Recent Projects</h2>
+        <p style="text-align:center; margin-bottom: 3rem; color:#444; max-width:800px; margin-left:auto; margin-right:auto;">
+            Take a look at some of our latest transformations across London
+        </p>
+
+        <!-- Swiper Slider اصلی پروژه‌ها -->
+        <div class="swiper-container projects-swiper">
+            <div class="swiper-wrapper">
+
+                <!-- 1 -->
+                <div class="swiper-slide">
+                    <img src="./slider/1File .jpg" alt="Professional Heating & Plumbing Installation" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Professional Heating System</h3>
+                        <p>Full boiler & radiator installation with premium pipework</p>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="swiper-slide">
+                    <img src="./slider/2File .jpg" alt="Advanced Heating & Plumbing System" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Advanced Heating & Plumbing</h3>
+                        <p>Complete underfloor heating and smart system integration</p>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="swiper-slide">
+                    <img src="./slider/3File .jpeg" alt="Rooflight / Skylight Glass Replacement" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Entrance Skylight Replacement</h3>
+                        <p>High-quality glass roof replacement for modern entrance</p>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="swiper-slide">
+                    <img src="./slider/4File .jpeg" alt="Office Fit-Out Inside Commercial Building" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Corporate Office Build</h3>
+                        <p>Full office construction and fit-out inside existing building</p>
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="swiper-slide">
+                    <img src="./slider/5File .jpeg" alt="Complete Bathroom Renovation" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Luxury Bathroom Renovation</h3>
+                        <p>Full bathroom & toilet transformation with premium finishes</p>
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="swiper-slide">
+                    <img src="./slider/6File .jpeg" alt="Full Kitchen Refurbishment" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Complete Kitchen Refurbishment</h3>
+                        <p>Modern kitchen design with high-end appliances and lighting</p>
+                    </div>
+                </div>
+
+                <!-- 7 -->
+                <div class="swiper-slide">
+                    <img src="./slider/7File .jpeg" alt="Luxury Bathroom Suite Renovation" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>High-End Bathroom Suite</h3>
+                        <p>Total renovation with walk-in shower and designer tiles</p>
+                    </div>
+                </div>
+
+                <!-- 8 -->
+                <div class="swiper-slide">
+                    <img src="./slider/8File .jpeg" alt="Garden Decking Installation" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Premium Garden Decking</h3>
+                        <p>Composite decking with integrated lighting and railings</p>
+                    </div>
+                </div>
+
+                <!-- 9 -->
+                <div class="swiper-slide">
+                    <img src="./slider/9File .jpeg" alt="Feature Wall Panelling & Interior Design" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Feature Wall Panelling</h3>
+                        <p>Bespoke wall panels with modern interior styling</p>
+                    </div>
+                </div>
+
+                <!-- 10 -->
+                <div class="swiper-slide">
+                    <img src="./slider/10File .jpeg" alt="Premium Flooring Installation" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Luxury Flooring Installation</h3>
+                        <p>Herringbone engineered wood flooring throughout</p>
+                    </div>
+                </div>
+
+                <!-- 11 -->
+                <div class="swiper-slide">
+                    <img src="./slider/11File .jpeg" alt="TV Wall Feature with Hidden Cabling" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>TV Media Wall</h3>
+                        <p>Custom built-in TV unit with hidden wiring and lighting</p>
+                    </div>
+                </div>
+
+                <!-- 12 -->
+                <div class="swiper-slide">
+                    <img src="./slider/12File .jpeg" alt="Shop Signage Installation" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Commercial Shop Signage</h3>
+                        <p>Professional sign installation with illuminated lettering</p>
+                    </div>
+                </div>
+
+                <!-- 13 -->
+                <div class="swiper-slide">
+                    <img src="./slider/13File .jpeg" alt="Luxury Villa Interior & Exterior Design" loading="lazy">
+                    <div class="slide-caption">
+                        <h3>Villa Full Transformation</h3>
+                        <p>Complete interior & exterior renovation of luxury villa</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Navigation & Pagination -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
     <div class="container" id="services" tabindex="0" aria-label="Main service categories">
         <h2>Our Main Service Categories</h2>
         <div class="services-grid" id="service-cards" role="list"></div>
@@ -1123,6 +1424,31 @@
         // Show first service details on load
         window.addEventListener('DOMContentLoaded', () => {
             showServiceDetails('general');
+        });
+                // اسلایدر پروژه‌های اصلی (قبل از دسته‌بندی‌ها)
+        const projectsSwiper = new Swiper('.projects-swiper', {
+            loop: true,
+            autoplay: {
+                delay: 4500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
+            speed: 800,
+            effect: 'slide',
+            grabCursor: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+            breakpoints: {
+                768: { slidesPerView: 1 },
+                1024: { slidesPerView: 1 }
+            }
         });
     </script>
 </body>
